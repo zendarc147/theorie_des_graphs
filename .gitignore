@@ -23,5 +23,8 @@
 hs_err_pid*
 replay_pid*
 
+# PDF files (cours et sujet)
+*.pdf
+
 *.pdf
 *.md
