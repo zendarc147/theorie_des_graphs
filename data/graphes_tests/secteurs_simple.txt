@@ -1,0 +1,25 @@
+# Graphe de test simple pour la coloration
+# Format:
+# SECTEURS: nombre_de_secteurs
+# SECTEUR id nom
+# VOISINS id1 id2
+
+SECTEURS: 6
+
+# Définition des secteurs
+SECTEUR 0 Centre-Ville
+SECTEUR 1 Quartier-Nord
+SECTEUR 2 Quartier-Est
+SECTEUR 3 Quartier-Sud
+SECTEUR 4 Quartier-Ouest
+SECTEUR 5 Zone-Industrielle
+
+# Relations de voisinage
+VOISINS 0 1
+VOISINS 0 2
+VOISINS 0 3
+VOISINS 0 4
+VOISINS 1 2
+VOISINS 2 3
+VOISINS 3 4
+VOISINS 4 5
