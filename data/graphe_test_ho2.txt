@@ -1,0 +1,88 @@
+# Problématique 2 : Collecte des poubelles
+# HO2 : Graphe orienté (certaines rues à sens unique)
+# CAS IDÉAL : Tous les sommets ont deg_in = deg_out
+#
+# Version étendue : 12 sommets, graphe riche et équilibré
+
+SOMMETS: 12
+
+# ------------------------ CYCLE PRINCIPAL (12 sommets) ------------------------
+
+RUE_ORIENTEE 0 1 Avenue-des-Champs
+RUE_ORIENTEE 1 2 Boulevard-Saint-Michel
+RUE_ORIENTEE 2 3 Rue-de-la-République
+RUE_ORIENTEE 3 4 Avenue-de-la-Gare
+RUE_ORIENTEE 4 5 Rue-des-Lilas
+RUE_ORIENTEE 5 6 Boulevard-du-Port
+RUE_ORIENTEE 6 7 Avenue-des-Sports
+RUE_ORIENTEE 7 8 Rue-des-Acacias
+RUE_ORIENTEE 8 9 Boulevard-des-Arts
+RUE_ORIENTEE 9 10 Avenue-de-l’Europe
+RUE_ORIENTEE 10 11 Rue-de-la-Prairie
+RUE_ORIENTEE 11 0 Boulevard-du-Trianon
+
+# ------------------------ DIAGONALES LONGUES (cycle intérieur) ------------------------
+
+RUE_ORIENTEE 0 6 Voie-Transversale-01
+RUE_ORIENTEE 6 0 Voie-Transversale-02
+
+RUE_ORIENTEE 1 7 Voie-Transversale-03
+RUE_ORIENTEE 7 1 Voie-Transversale-04
+
+RUE_ORIENTEE 2 8 Voie-Transversale-05
+RUE_ORIENTEE 8 2 Voie-Transversale-06
+
+RUE_ORIENTEE 3 9 Voie-Transversale-07
+RUE_ORIENTEE 9 3 Voie-Transversale-08
+
+RUE_ORIENTEE 4 10 Voie-Transversale-09
+RUE_ORIENTEE 10 4 Voie-Transversale-10
+
+RUE_ORIENTEE 5 11 Voie-Transversale-11
+RUE_ORIENTEE 11 5 Voie-Transversale-12
+
+# ------------------------ PETITES LIAISONS LOCALES (triangles orientés) ------------------------
+
+# Triangle autour de (0,1,2)
+RUE_ORIENTEE 0 2 Petite-Voie-01
+RUE_ORIENTEE 2 1 Petite-Voie-02
+RUE_ORIENTEE 1 0 Petite-Voie-03
+
+# Triangle autour de (3,4,5)
+RUE_ORIENTEE 3 5 Petite-Voie-04
+RUE_ORIENTEE 5 4 Petite-Voie-05
+RUE_ORIENTEE 4 3 Petite-Voie-06
+
+# Triangle autour de (6,7,8)
+RUE_ORIENTEE 6 8 Petite-Voie-07
+RUE_ORIENTEE 8 7 Petite-Voie-08
+RUE_ORIENTEE 7 6 Petite-Voie-09
+
+# Triangle autour de (9,10,11)
+RUE_ORIENTEE 9 11 Petite-Voie-10
+RUE_ORIENTEE 11 10 Petite-Voie-11
+RUE_ORIENTEE 10 9 Petite-Voie-12
+
+# ------------------------ CONNEXIONS ADDITIONNELLES POUR COMPLEXIFIER ------------------------
+
+RUE_ORIENTEE 0 3 Chemin-Haut-01
+RUE_ORIENTEE 3 6 Chemin-Haut-02
+RUE_ORIENTEE 6 9 Chemin-Haut-03
+RUE_ORIENTEE 9 0 Chemin-Haut-04
+
+RUE_ORIENTEE 2 5 Chemin-Bas-01
+RUE_ORIENTEE 5 8 Chemin-Bas-02
+RUE_ORIENTEE 8 11 Chemin-Bas-03
+RUE_ORIENTEE 11 2 Chemin-Bas-04
+
+# ------------------------- MINI RACCOURCIS ENTRE BLOCS -------------------------
+
+RUE_ORIENTEE 1 4 Raccourci-01
+RUE_ORIENTEE 4 7 Raccourci-02
+RUE_ORIENTEE 7 10 Raccourci-03
+RUE_ORIENTEE 10 1 Raccourci-04
+
+RUE_ORIENTEE 0 9 Raccourci-05
+RUE_ORIENTEE 9 6 Raccourci-06
+RUE_ORIENTEE 6 3 Raccourci-07
+RUE_ORIENTEE 3 0 Raccourci-08
