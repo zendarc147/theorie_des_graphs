@@ -1,0 +1,20 @@
+# Problématique 2 : Collecte des poubelles
+# HO1 : Graphe non orienté (toutes les rues à double sens)
+# CAS IDÉAL : Tous les sommets sont de degrés pairs
+#
+# Graphe de test principal pour HO1
+
+SOMMETS: 6
+
+# Réseau de rues formant un hexagone avec diagonales
+# Tous les sommets ont un degré pair (2 ou 4)
+
+RUE 0 1 Avenue-des-Champs
+RUE 1 2 Rue-Principale
+RUE 2 3 Boulevard-du-Parc
+RUE 3 4 Rue-des-Écoles
+RUE 4 5 Avenue-de-la-Gare
+RUE 5 0 Rue-Nationale
+RUE 0 2 Passage-Central
+RUE 2 4 Allée-Traversière
+RUE 4 0 Rue-du-Triangle
