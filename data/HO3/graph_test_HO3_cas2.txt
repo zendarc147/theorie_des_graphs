@@ -1,0 +1,58 @@
+# Problématique 2 : Collecte des poubelles
+# HO3 : Graphe mixte (combinaison de rues différentes)
+# CAS : Deux sommets ont un degré impair (2 et 7)
+#
+# Graphe de test pour HO3 — version étendue (8 sommets)
+
+SOMMETS: 8
+
+# ---------------------------------------------------------------------------
+# CYCLE PRINCIPAL — RUE (double sens)
+# Tous les sommets deviennent pairs après ce cycle.
+# ---------------------------------------------------------------------------
+
+RUE 0 1 Petite-Rue-A
+RUE 1 2 Petite-Rue-B
+RUE 2 3 Petite-Rue-C
+RUE 3 4 Petite-Rue-D
+RUE 4 5 Petite-Rue-E
+RUE 5 6 Petite-Rue-F
+RUE 6 7 Petite-Rue-G
+RUE 7 0 Petite-Rue-H
+
+# ---------------------------------------------------------------------------
+# RUES_DOUBLE — ajoutent +2 degrés à chaque extrémité → ne changent PAS la parité
+# ---------------------------------------------------------------------------
+
+RUE_DOUBLE 0 4 Avenue-Duplex-1
+RUE_DOUBLE 2 6 Avenue-Duplex-2
+RUE_DOUBLE 1 5 Boulevard-Duplex-3
+RUE_DOUBLE 3 7 Boulevard-Duplex-4
+
+# ---------------------------------------------------------------------------
+# CYCLES ORIENTÉS — chaque cycle préserve deg_in = deg_out donc parité inchangée
+# ---------------------------------------------------------------------------
+
+# Cycle orienté pair : 0 -> 2 -> 4 -> 6 -> 0
+RUE_ORIENTEE 0 2 Voie-Bus-1
+RUE_ORIENTEE 2 4 Voie-Bus-2
+RUE_ORIENTEE 4 6 Voie-Bus-3
+RUE_ORIENTEE 6 0 Voie-Bus-4
+
+# Cycle orienté impair : 1 -> 3 -> 5 -> 7 -> 1
+RUE_ORIENTEE 1 3 Transit-1
+RUE_ORIENTEE 3 5 Transit-2
+RUE_ORIENTEE 5 7 Transit-3
+RUE_ORIENTEE 7 1 Transit-4
+
+# ---------------------------------------------------------------------------
+# AJOUT D’UNE SEULE ARÊTE ORIENTÉE QUI REND DEUX SOMMETS IMPAIRS
+# ---------------------------------------------------------------------------
+
+RUE_ORIENTEE 2 7 Liaison-Impaire-Speciale
+
+# Ce que modifie cette arête :
+#   - sommet 2 : +1 sortie → degré total passe de pair à impair
+#   - sommet 7 : +1 entrée → degré total passe de pair à impair
+#
+# Tous les autres sommets conservent un degré pair.
