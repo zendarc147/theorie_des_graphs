@@ -1,0 +1,53 @@
+# Problématique 2 : Collecte des poubelles
+# HO1 : Graphe non orienté (toutes les rues à double sens)
+# CAS : Aucune contrainte sur les degrés des sommets
+#       Degrés arbitraires, graphe "brouillon" pour tester les algos
+
+SOMMETS: 10
+
+# ------------------------ BOUCLE CENTRALE (0–1–2–3–0) ------------------------
+
+RUE 0 1 Avenue-des-Champs
+RUE 1 2 Rue-Principale
+RUE 2 3 Boulevard-du-Parc
+RUE 3 0 Rue-du-Maréchal
+
+# ------------------------ BRANCHE VERS LE SUD (2–4–5) ------------------------
+
+RUE 2 4 Rue-des-Écoles
+RUE 4 5 Rue-de-la-Gare
+
+# 5 est presque une feuille (peu de connexions)
+RUE 5 1 Impasse-des-Poubelles
+
+# ------------------------ BRANCHE NORD-EST (1–6–7) ------------------------
+
+RUE 1 6 Rue-du-Stade
+RUE 6 7 Rue-des-Cèdres
+
+# 7 n’a qu’une seule connexion vers 6 pour l’instant
+
+# ------------------------ ZONE CHAOTIQUE AUTOUR DE 0, 2, 8, 9 ------------------------
+
+RUE 0 2 Passage-Central
+RUE 0 8 Rue-des-Acacias
+RUE 8 2 Rue-du-Belvédère
+RUE 8 3 Rue-des-Lilas
+RUE 8 9 Avenue-des-Sports
+RUE 9 0 Boulevard-des-Rochers
+RUE 9 2 Route-du-Viaduc
+
+# ------------------------ LIENS LONGUE DISTANCE BIZARRES ------------------------
+
+RUE 4 9 Chemin-des-Camions
+RUE 6 2 Rocade-Nord
+RUE 7 3 Sentier-des-Collines
+RUE 5 8 Route-de-Campagne
+RUE 6 9 Liaison-Express
+RUE 1 9 Avenue-de-l’Europe
+
+# ------------------------ QUELQUES AJOUTS POUR DÉSÉQUILIBRER ENCORE PLUS ------------------------
+
+RUE 3 5 Rue-des-Containers
+RUE 4 7 Rue-des-Broussailles
+RUE 6 8 Rue-du-Bois

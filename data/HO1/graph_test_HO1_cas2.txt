@@ -1,0 +1,43 @@
+# Problématique 2 : Collecte des poubelles
+# HO1 : Graphe non orienté (toutes les rues à double sens)
+# CAS : Exactement deux sommets de degré impair (0 et 7)
+
+SOMMETS: 10
+
+# ------------------------ CYCLE PRINCIPAL (pair pour tous au début) ------------------------
+
+RUE 0 1 Avenue-des-Champs
+RUE 1 2 Rue-Principale
+RUE 2 3 Boulevard-du-Parc
+RUE 3 4 Rue-des-Écoles
+RUE 4 5 Avenue-de-la-Gare
+RUE 5 6 Rue-de-la-Rivière
+RUE 6 7 Boulevard-des-Cèdres
+RUE 7 8 Rue-des-Acacias
+RUE 8 9 Avenue-des-Sports
+RUE 9 0 Rue-Nationale
+# -> Tous les sommets ont un degré 2 (pair)
+
+# ------------------------ CYCLES SUPPLÉMENTAIRES (ne changent pas la parité) ------------------------
+
+RUE 0 2 Passage-Central
+RUE 2 4 Allée-Traversière
+RUE 4 0 Rue-du-Triangle
+# -> 0,2,4 gagnent +2 → restent pairs
+
+RUE 1 3 Rue-du-Marché
+RUE 3 5 Rue-des-Fleurs
+RUE 5 1 Rue-de-l’Église
+# -> 1,3,5 gagnent +2 → restent pairs
+
+RUE 6 8 Allée-des-Jardins
+RUE 8 9 Rue-des-Rosiers
+RUE 9 6 Rue-du-Belvédère
+# -> 6,8,9 gagnent +2 → restent pairs
+
+
+# ------------------------ ARÊTE QUI REND 0 ET 7 IMPAIRS ------------------------
+
+RUE 0 7 Liaison-Impaire-Speciale
+# -> 0 : pair → impair
+# -> 7 : pair → impair

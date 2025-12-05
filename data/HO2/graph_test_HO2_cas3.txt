@@ -1,0 +1,93 @@
+# Problématique 2 : Collecte des poubelles
+# HO2 : Graphe orienté (rues à sens unique)
+# CAS : Aucune contrainte sur les degrés des sommets
+#       (degrés totalement arbitraires, graphe "sale" pour tester les algos)
+
+SOMMETS: 15
+
+# ------------------------ CENTRE-VILLE (0 à 4) ------------------------
+
+RUE_ORIENTEE 0 1 Avenue-de-la-République
+RUE_ORIENTEE 1 2 Rue-de-la-Mairie
+RUE_ORIENTEE 2 3 Boulevard-de-la-Gare
+RUE_ORIENTEE 3 0 Rue-du-Maréchal-Foch
+
+RUE_ORIENTEE 0 2 Rue-des-Ecoles
+RUE_ORIENTEE 2 4 Rue-du-Stade
+RUE_ORIENTEE 4 1 Rue-de-l’Église
+
+# 0 devient un gros carrefour sortant
+RUE_ORIENTEE 0 3 Rue-du-Théâtre
+RUE_ORIENTEE 0 4 Place-Centrale
+
+# 3 reçoit beaucoup d’entrées
+RUE_ORIENTEE 1 3 Rue-du-Marché
+RUE_ORIENTEE 4 3 Rue-des-Fleurs
+
+# ------------------------ QUARTIER NORD (5 à 8) ------------------------
+
+RUE_ORIENTEE 2 5 Avenue-du-Nord
+RUE_ORIENTEE 5 6 Rue-des-Chênes
+RUE_ORIENTEE 6 7 Rue-des-Pins
+RUE_ORIENTEE 7 5 Rue-des-Bouleaux
+
+# Lien déséquilibré vers le centre
+RUE_ORIENTEE 5 1 Chemin-du-Retour
+RUE_ORIENTEE 7 2 Chemin-du-Belvédère
+
+# Rues qui ne reviennent sur personne (degree_out > degree_in pour certains)
+RUE_ORIENTEE 6 8 Chemin-de-Campagne
+RUE_ORIENTEE 5 8 Chemin-des-Moulins
+RUE_ORIENTEE 8 3 Route-du-Point-de-Vue
+
+# ------------------------ ZONE INDUSTRIELLE (9 à 11) ------------------------
+
+RUE_ORIENTEE 3 9 Voie-Express-ZI
+RUE_ORIENTEE 9 10 Rue-des-Entrepots
+RUE_ORIENTEE 10 11 Rue-des-Usines
+
+# Peu de retours vers la ville
+RUE_ORIENTEE 11 4 Route-de-la-Logistique
+RUE_ORIENTEE 10 2 Bretelle-de-Raccordement
+
+# Cul-de-sac industriel (11 sans sortie vers autre chose)
+RUE_ORIENTEE 9 11 Impasse-des-Camions
+
+# ------------------------ LOTISSEMENT SUD (12 à 14) ------------------------
+
+RUE_ORIENTEE 4 12 Avenue-des-Jardins
+RUE_ORIENTEE 12 13 Rue-des-Roses
+RUE_ORIENTEE 13 14 Rue-des-Violettes
+
+# Un seul retour vers la ville
+RUE_ORIENTEE 14 0 Rond-Point-du-Chêne
+
+# Rues internes en sens uniques mal foutues exprès
+RUE_ORIENTEE 12 14 Allée-des-Cerisiers
+RUE_ORIENTEE 13 12 Allée-des-Pivoines
+
+# ------------------------ LIENS LONGUE DISTANCE BIZARRES ------------------------
+
+RUE_ORIENTEE 8 13 Route-de-la-Forêt
+RUE_ORIENTEE 6 10 Route-de-Ceinture
+RUE_ORIENTEE 1 9 Route-du-Viaduc
+RUE_ORIENTEE 7 14 Chemin-des-Collines
+RUE_ORIENTEE 5 11 Route-des-Remorques
+
+# Gros hub très déséquilibré vers 2
+RUE_ORIENTEE 9 2 Bypass-Nord
+RUE_ORIENTEE 11 2 Liaison-Sud-Est
+RUE_ORIENTEE 8 2 Bypass-Bois
+RUE_ORIENTEE 14 2 Bypass-Lotissement
+
+# ------------------------ QUELQUES RUES "ISOLÉES" OU TRÈS LOUCHE ------------------------
+
+# 10 envoie encore plus vers 3 (3 devient giga hub entrant)
+RUE_ORIENTEE 10 3 Bretelle-Sortie-Ouest
+RUE_ORIENTEE 6 3 Chemin-des-Cravates
+
+# 1 reçoit peu mais envoie loin
+RUE_ORIENTEE 1 13 Route-Scénique
+
+# Rue totalement paumée qui fait 9 -> 5 (boucle bizarre entre régions)
+RUE_ORIENTEE 9 5 Rocade-Interquartiers

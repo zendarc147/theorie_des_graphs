@@ -1,0 +1,59 @@
+# Problématique 2 : Collecte des poubelles
+# HO3 : Graphe mixte (combinaison de rues différentes)
+# CAS IDÉAL : Tous les sommets ont deg_in = deg_out
+#
+# Graphe de test principal pour HO3 — version étendue
+
+SOMMETS: 8
+
+# Mélange de 3 types de rues :
+# - RUE : double sens, 1 voie (ramassage 2 côtés en 1 passage, +1 in +1 out)
+# - RUE_DOUBLE : double sens, plusieurs voies (2 passages, +1 in +1 out chacun)
+# - RUE_ORIENTEE : sens unique (1 passage, +1 out pour départ, +1 in pour arrivée)
+
+# ---------------------------------------------------------------------------
+# Cycle principal avec RUE (arêtes non orientées)
+# Chaque sommet a après ça deg_in = 2 et deg_out = 2
+# ---------------------------------------------------------------------------
+
+RUE 0 1 Petite-Rue-A
+RUE 1 2 Petite-Rue-B
+RUE 2 3 Petite-Rue-C
+RUE 3 4 Petite-Rue-D
+RUE 4 5 Petite-Rue-E
+RUE 5 6 Petite-Rue-F
+RUE 6 7 Petite-Rue-G
+RUE 7 0 Petite-Rue-H
+
+# ---------------------------------------------------------------------------
+# RUES_DOUBLE : grandes avenues à double sens avec plusieurs voies
+# Chaque RUE_DOUBLE ajoute +2 in et +2 out à chaque extrémité
+# (équivalent à deux RUE parallèles)
+# => Ne casse jamais l’égalité deg_in = deg_out
+# ---------------------------------------------------------------------------
+
+RUE_DOUBLE 0 4 Avenue-Duplex-1
+RUE_DOUBLE 2 6 Avenue-Duplex-2
+RUE_DOUBLE 1 5 Boulevard-Duplex-3
+RUE_DOUBLE 3 7 Boulevard-Duplex-4
+
+# ---------------------------------------------------------------------------
+# RUES_ORIENTEES : sens unique
+# On les organise en cycles orientés pour garder deg_in = deg_out
+# ---------------------------------------------------------------------------
+
+# Cycle orienté pair : 0 -> 2 -> 4 -> 6 -> 0
+RUE_ORIENTEE 0 2 Voie-Bus-1
+RUE_ORIENTEE 2 4 Voie-Bus-2
+RUE_ORIENTEE 4 6 Voie-Bus-3
+RUE_ORIENTEE 6 0 Voie-Bus-4
+
+# Cycle orienté impair : 1 -> 3 -> 5 -> 7 -> 1
+RUE_ORIENTEE 1 3 Transit-1
+RUE_ORIENTEE 3 5 Transit-2
+RUE_ORIENTEE 5 7 Transit-3
+RUE_ORIENTEE 7 1 Transit-4
+
+# À la fin :
+# - Chaque sommet a autant d’entrées que de sorties (deg_in = deg_out)
+# - Le graphe contient un vrai mélange de RUE, RUE_DOUBLE et RUE_ORIENTEE
