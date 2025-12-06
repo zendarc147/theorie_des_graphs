@@ -1,6 +1,8 @@
 package theme1.prob2.HO1;
 
 import java.util.*;
+import theme1.prob2.commun.Dijkstra;
+import theme1.prob2.commun.CouplageGlouton;
 
 public class CollectePoubelles_HO1_CasIdeal {
 
@@ -69,7 +71,7 @@ public class CollectePoubelles_HO1_CasIdeal {
         return hierholzer(graphe, sommetDepart);
     }
 
-    // CAS 3 : Cas général → Algorithme du postier chinois (simplification)
+    // CAS 3 : Cas général → Algorithme du postier chinois COMPLET
     public static List<Integer> resoudrePostierChinois(GrapheNonOriente graphe) {
         List<Integer> sommetsImpairs = getSommetsImpairs(graphe);
 
@@ -83,13 +85,113 @@ public class CollectePoubelles_HO1_CasIdeal {
             System.out.println("→ Exactement 2 sommets impairs, on utilise le chemin eulérien.");
             return trouverCheminEulerien(graphe);
         } else {
-            System.out.println("\n⚠ Cas complexe : " + sommetsImpairs.size() + " sommets impairs.");
-            System.out.println("  Il faut dupliquer certaines arêtes pour obtenir un graphe eulérien.");
-            System.out.println("  (Implémentation simplifiée : on trouve juste un parcours couvrant)");
+            System.out.println("\n⚙ Cas complexe : " + sommetsImpairs.size() + " sommets impairs.");
+            System.out.println("  Application de l'algorithme du postier chinois complet :\n");
 
-            // Pour l'instant, on fait juste un parcours simple depuis le premier sommet
-            return hierholzer(graphe, 0);
+            // ÉTAPE 1 : Calculer les plus courts chemins entre sommets impairs avec Dijkstra
+            System.out.println("  [1/4] Calcul des plus courts chemins (Dijkstra)...");
+            int[][] distances = Dijkstra.calculerMatriceDistances(
+                graphe.getListeAdjacence(),
+                graphe.getNbSommets(),
+                sommetsImpairs
+            );
+
+            System.out.println("        Matrice des distances entre sommets impairs :");
+            for (int i = 0; i < sommetsImpairs.size(); i++) {
+                System.out.print("        Sommet " + sommetsImpairs.get(i) + " : ");
+                for (int j = 0; j < sommetsImpairs.size(); j++) {
+                    if (i != j) {
+                        System.out.print(sommetsImpairs.get(j) + "→" + distances[i][j] + " ");
+                    }
+                }
+                System.out.println();
+            }
+
+            // ÉTAPE 2 : Couplage glouton des sommets impairs
+            System.out.println("\n  [2/4] Couplage glouton des sommets impairs...");
+            List<CouplageGlouton.Paire> couplage = CouplageGlouton.trouverCouplage(sommetsImpairs, distances);
+
+            System.out.println("        Paires trouvées :");
+            for (CouplageGlouton.Paire paire : couplage) {
+                System.out.println("        - " + paire);
+            }
+            int coutTotal = CouplageGlouton.calculerCout(couplage);
+            System.out.println("        Coût total des duplications : " + coutTotal + " arêtes");
+
+            // ÉTAPE 3 : Dupliquer les arêtes sur les plus courts chemins
+            System.out.println("\n  [3/4] Duplication des arêtes pour équilibrer le graphe...");
+            GrapheNonOriente grapheAugmente = dupliquerAretes(graphe, sommetsImpairs, couplage);
+
+            System.out.println("        Graphe augmenté créé :");
+            System.out.println("        - Arêtes originales : " + compterAretes(graphe));
+            System.out.println("        - Arêtes dupliquées : " + coutTotal);
+            System.out.println("        - Total : " + compterAretes(grapheAugmente));
+
+            // Vérifier que le graphe augmenté est eulérien
+            List<Integer> sommetsImpairsAugmente = getSommetsImpairs(grapheAugmente);
+            System.out.println("        Sommets impairs restants : " + sommetsImpairsAugmente.size());
+
+            // ÉTAPE 4 : Appliquer Hierholzer sur le graphe augmenté
+            System.out.println("\n  [4/4] Application de Hierholzer sur le graphe augmenté...");
+            List<Integer> parcours = hierholzer(grapheAugmente, 0);
+
+            System.out.println("\n✓ Algorithme du postier chinois terminé !");
+            System.out.println("  Le parcours optimal visite " + (parcours.size() - 1) + " arêtes");
+            System.out.println("  (dont " + coutTotal + " arêtes parcourues 2 fois)\n");
+
+            return parcours;
         }
+    }
+
+    /**
+     * Duplique les arêtes sur les plus courts chemins entre les paires de sommets
+     */
+    private static GrapheNonOriente dupliquerAretes(
+            GrapheNonOriente graphe,
+            List<Integer> sommetsImpairs,
+            List<CouplageGlouton.Paire> couplage) {
+
+        // Créer une copie du graphe
+        GrapheNonOriente grapheAugmente = new GrapheNonOriente(graphe.getNbSommets());
+
+        // Copier toutes les arêtes originales
+        for (int i = 0; i < graphe.getNbSommets(); i++) {
+            for (int voisin : graphe.getVoisins(i)) {
+                if (i < voisin) { // Éviter les doublons
+                    grapheAugmente.ajouterArete(i, voisin);
+                }
+            }
+        }
+
+        // Pour chaque paire du couplage, ajouter les arêtes du plus court chemin
+        for (CouplageGlouton.Paire paire : couplage) {
+            // Calculer le plus court chemin entre les deux sommets
+            Dijkstra.ResultatDijkstra resultat = Dijkstra.calculerPlusCourtsChemin(
+                graphe.getListeAdjacence(),
+                graphe.getNbSommets(),
+                paire.sommet1
+            );
+
+            List<Integer> chemin = Dijkstra.reconstruireChemin(resultat, paire.sommet2);
+
+            // Dupliquer les arêtes de ce chemin
+            for (int i = 0; i < chemin.size() - 1; i++) {
+                grapheAugmente.ajouterArete(chemin.get(i), chemin.get(i + 1));
+            }
+        }
+
+        return grapheAugmente;
+    }
+
+    /**
+     * Compte le nombre d'arêtes dans le graphe
+     */
+    private static int compterAretes(GrapheNonOriente graphe) {
+        int total = 0;
+        for (int i = 0; i < graphe.getNbSommets(); i++) {
+            total += graphe.getVoisins(i).size();
+        }
+        return total / 2; // Divisé par 2 car chaque arête est comptée deux fois
     }
 
     // Algorithme de Hierholzer réutilisable
