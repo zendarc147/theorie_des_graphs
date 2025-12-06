@@ -27,7 +27,6 @@ public class Routes2 {
 
     //methode pour ajouter une route double sens
     public void ajouterRouteDoublesens (int u, int v, int p) {
-        //HO1 : rue à double sens
         // arrete de u vers v
         sortie.get(u).add(new Sortie2(v,p));
         // arrete de v vers u
