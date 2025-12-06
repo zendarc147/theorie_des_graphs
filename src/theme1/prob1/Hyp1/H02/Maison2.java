@@ -1,6 +1,6 @@
-package src.theme1.prob1.Hyp1.H03;
+package src.theme1.prob1.Hyp1.H02;
 
-public class Maison {
+public class Maison2 {
 
     //sommet de depart arête de la maison
     public int depart;
@@ -14,10 +14,11 @@ public class Maison {
     public int verif;
 
     //constructeur
-    public Maison(int depart, int arrive, boolean coteG) {
+    public Maison2(int depart, int arrive, boolean coteG) {
         this.depart = depart;
         this.arrive = arrive;
         this.coteG = coteG;
-        verif =0;
+        this.verif = 0;
     }
+
 }

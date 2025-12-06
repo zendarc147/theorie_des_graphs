@@ -22,15 +22,22 @@ public class Routes2 {
 
     //methode pour ajouter une route sens unique
     public void ajouterRouteSensUnique (int u, int v, int p){
-        sortie.get(u).add(new Sortie2(v,p));
+        sortie.get(u).add(new Sortie2(v,p,false,1));
     }
 
     //methode pour ajouter une route double sens
     public void ajouterRouteDoublesens (int u, int v, int p) {
         // arrete de u vers v
-        sortie.get(u).add(new Sortie2(v,p));
+        sortie.get(u).add(new Sortie2(v,p,true,2));
         // arrete de v vers u
-        sortie.get(v).add(new Sortie2(u,p));
+        sortie.get(v).add(new Sortie2(u,p,true,2));
+    }
+
+    public int ajouterMaison(){
+        sortie.add(new ArrayList<>());
+        n++;
+        //donner indice de la maison (n-1 car indices commencent à 0)
+        return n-1;
     }
 
     //comme n est un attribut privé, on le retourne avec une méthode

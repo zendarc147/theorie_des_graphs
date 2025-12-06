@@ -20,7 +20,7 @@ public class Main {
     }
 
     //relier la maison au graphe (H03)
-    public static void maisonGraphe(Routes3 r, Maison m){
+    public static void maisonGraphe(Routes3 r, Maison3 m){
 
         int u = m.depart;
         int v = m.arrive;
@@ -124,7 +124,7 @@ public class Main {
         int depart = 1;
 
         // Demandes des clients (sommet -> maison)
-        List<Maison> demandes = new ArrayList<>();
+        List<Maison3> demandes = new ArrayList<>();
 
         while (true) {
             System.out.println("\n--- Menu ---");
@@ -143,7 +143,7 @@ public class Main {
                 boolean coteGauche = sc.nextBoolean();
 
                 //creer et ajouter la maison
-                Maison m = new Maison(departMaison, arriveeMaison, coteGauche);
+                Maison3 m = new Maison3(departMaison, arriveeMaison, coteGauche);
                 //sommet
                 m.id = gt.ajouterMaison();
                 maisonGraphe(gt, m);
@@ -170,7 +170,7 @@ public class Main {
                 //calcul du chemin
                 DijkstraDonnees3 chem = Dijkstra3.calculpcc(gt, depart);
 
-                for (Maison m : demandes) {
+                for (Maison3 m : demandes) {
                     List<Integer> chemin = Chemin(chem.pred,m.id);
 
                     System.out.println("Maison sur " + m.depart + "->" + m.arrive + ", cote : " + (m.coteG?"gauche":"droit"));

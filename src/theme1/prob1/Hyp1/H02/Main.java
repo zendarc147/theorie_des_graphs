@@ -1,5 +1,9 @@
 package src.theme1.prob1.Hyp1.H02;
 
+import src.theme1.prob1.Hyp1.H03.Dijkstra3;
+import src.theme1.prob1.Hyp1.H03.DijkstraDonnees3;
+import src.theme1.prob1.Hyp1.H03.Maison3;
+
 import java.util.*;
 
 public class Main {
@@ -18,6 +22,54 @@ public class Main {
         return chemin;
     }
 
+    //relier la maison au graphe (H02)
+    public static void maisonGraphe(Routes2 r, Maison2 m){
+
+        int u = m.depart;
+        int v = m.arrive;
+
+        // verifier si la rue existe bien ds le graphe
+        Sortie2 arc = null;
+        for (Sortie2 s : r.Adj().get(u)){
+            if (s.numr == v){
+                arc = s;
+                break;
+            }
+        }
+        //si l'arête n'existe pas
+        if (arc == null){
+            System.out.println("La rue indique n'existe pas...");
+            m.verif =1;
+            return;
+        }
+        //si double sens (2 voies)
+        if (arc.doublesens){
+            if(m.coteG){
+                r.ajouterRouteSensUnique(v,m.id,arc.poids);
+                r.ajouterRouteSensUnique(m.id,u,arc.poids);
+            }
+            else{
+                r.ajouterRouteSensUnique(u,m.id,arc.poids);
+                r.ajouterRouteSensUnique(m.id,v,arc.poids);
+            }
+            return;
+        }
+        //si sens unique
+        if(!arc.doublesens){
+            // coté non autorisé
+            if(m.coteG){
+                System.out.println("rue a sens unique, impossible de ramasser à gauche");
+                //impossible de passer par la maison
+                m.verif = 1;
+                return;
+            }
+            //si à droite
+            r.ajouterRouteSensUnique(u,m.id,arc.poids);
+            r.ajouterRouteSensUnique(m.id,v,arc.poids);
+            return;
+        }
+    }
+
     //main principal
     public static void main(String[] args) {
 
@@ -26,6 +78,7 @@ public class Main {
         //creation graphe pour test
         //25 sommets
         Routes2 gt = new Routes2(25);
+
         //on ajoute les arrêtes
         gt.ajouterRouteSensUnique(1, 2, 4);
         gt.ajouterRouteDoublesens(2, 3, 2);
@@ -65,7 +118,7 @@ public class Main {
         int depart = 1;
 
         // Demandes des clients (sommet -> maison)
-        List<Integer> demandes = new ArrayList<>();
+        List<Maison2> demandes = new ArrayList<>();
 
         while (true) {
             System.out.println("\n--- Menu ---");
@@ -76,15 +129,29 @@ public class Main {
             int choix = sc.nextInt();
 
             if (choix == 1) {
-                System.out.print("Entrez le numéro de votre maison (0 à 25) : ");
-                int maison = sc.nextInt();
-                demandes.add(maison);
+                System.out.print("Entrez le sommet de départ de la rue où se trouve votre maison : ");
+                int departMaison = sc.nextInt();
+                System.out.print("Entrez le sommet d'arrivée de la rue : ");
+                int arriveeMaison = sc.nextInt();
+                System.out.print("Votre maison est-elle du côté gauche ? (true/false) : ");
+                boolean coteGauche = sc.nextBoolean();
 
-                DijkstraDonnees2 res = Dijkstra2.calculpcc(gt, depart);
-                List<Integer> chemin = Chemin(res.pred, maison);
+                //creer et ajouter la maison
+                Maison2 m = new Maison2(departMaison, arriveeMaison, coteGauche);
+                //sommet
+                m.id = gt.ajouterMaison();
+                maisonGraphe(gt, m);
+                demandes.add(m);
 
-                System.out.println("Chemin le plus court : " + chemin);
-                System.out.println("Distance totale : " + res.distance[maison] + " unités");
+                //calcul chemin avec Dijkstra
+                DijkstraDonnees2 chem = Dijkstra2.calculpcc(gt, depart);
+                List<Integer> chemin = Chemin(chem.pred, m.id);
+
+                if(m.verif !=1){
+                    System.out.println("Chemin le plus court : " + chemin);
+                    System.out.println("Distance totale : " + chem.distance[m.id] + " unités");
+                }
+
             } else if (choix == 2) {
 
                 if (demandes.isEmpty()) {
@@ -94,12 +161,20 @@ public class Main {
 
                 System.out.println("\n--- Liste des demandes ---");
 
-                DijkstraDonnees2 res = Dijkstra2.calculpcc(gt, depart);
+                //calcul du chemin
+                DijkstraDonnees2 chem = Dijkstra2.calculpcc(gt, depart);
 
-                for (int d : demandes) {
-                    List<Integer> chemin = Chemin(res.pred, d);
-                    System.out.println("Maison " + d + " : chemin " + chemin +
-                            " (distance " + res.distance[d] + ")");
+                for (Maison2 m : demandes) {
+                    List<Integer> chemin = Chemin(chem.pred,m.id);
+
+                    System.out.println("Maison sur " + m.depart + "->" + m.arrive + ", cote : " + (m.coteG?"gauche":"droit"));
+                    if(m.verif !=1){
+                        System.out.println("Chemin à emprunter : " +chemin);
+                        System.out.println("Distance : " +chem.distance[m.id] + " unites\n");
+                    }
+                    else{
+                        System.out.println("Impossible car mauvais cote\n");
+                    }
                 }
 
             } else if (choix == 3) {
