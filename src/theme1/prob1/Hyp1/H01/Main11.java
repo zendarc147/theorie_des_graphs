@@ -119,7 +119,7 @@ public class Main11 {
 
                 System.out.println("\n--- Liste des demandes ---");
 
-                // Dijkstra une seule fois prcq la c'est just ela liste des demandes donc on donne le chemin aller pour information mais pas besoin de faire retour ici
+                // Dijkstra une seule fois prcq la c'est juste la liste des demandes donc on donne le chemin aller pour information mais pas besoin de faire retour ici
                 DijkstraDonnees1 res = Dijkstra1.calculpcc(gt, depart);
 
                 //pour chaque demande afficher chemin et distance
