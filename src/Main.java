@@ -3,6 +3,10 @@ import theme2.approche1.Mt2Citoyen;
 import theme2.approche2.Mt22;
 import theme2.approche2.Mt22AvecCapacite;
 import theme2.approche2.Mt22Citoyen;
+import theme1.prob1.Hyp1.H01.*;
+import theme1.prob1.Hyp1.H02.*;
+import theme1.prob1.Hyp1.H03.*;
+import theme1.prob1.Hyp2.*;
 
 import java.util.Scanner;
 
@@ -145,6 +149,44 @@ public class Main {
                 case 1:
                     if (typeUtilisateur == 1) {
                         System.out.println(">> Affichage des informations sur la collecte des encombrants (vue Utilisateur)...");
+                        System.out.println("1.Sans tournee (hyp1)\n");
+                        System.out.println("2.Avec tournees (hyp2)\n");
+                        int c = Integer.parseInt(scanner.nextLine());
+                        switch (c){
+                            case 1:
+                                System.out.println("1.H01\n");
+                                System.out.println("2.H02\n");
+                                System.out.println("3.H03\n");
+                                int c2 = Integer.parseInt(scanner.nextLine());
+                                switch (c2) {
+                                    case 1:
+                                        //prob1 hyp1 H01
+                                        theme1.prob1.Hyp1.H01.Main11.main(new String[]{});
+                                        break;
+                                    case 2:
+                                        //prob1 hyp1 H02
+                                        src.theme1.prob1.Hyp1.H02.Main12.main(new String[]{});
+                                        break;
+                                    case 3:
+                                        //prob 1 hyp1 H03
+                                        src.theme1.prob1.Hyp1.H03.Main13.main(new String[]{});
+                                        break;
+                                }
+                            case 2:
+                                System.out.println("1.H01\n");
+                                System.out.println("2.H02\n");
+                                int c3 = Integer.parseInt(scanner.nextLine());
+                                switch (c3){
+                                    case 1:
+                                        //prob1 hyp2 H01
+                                        theme1.prob1.Hyp2.H01.Main21.main(new String[]{});
+                                        break;
+                                    case 2:
+                                        //prob1 hyp2 H02
+                                        theme1.prob1.Hyp2.H02.Main22.main(new String[]{});
+                                        break;
+                                }
+                        }
                     } else {
                         System.out.println(">> Lancement de l'optimisation de la collecte des encombrants (Thème 1 / Prob 1)...");
                     }
