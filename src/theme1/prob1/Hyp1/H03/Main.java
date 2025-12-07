@@ -126,6 +126,7 @@ public class Main {
         // Demandes des clients (sommet -> maison)
         List<Maison3> demandes = new ArrayList<>();
 
+        //menu (chatgpt)
         while (true) {
             System.out.println("\n--- Menu ---");
             System.out.println("1. Client : demander un enlèvement");
@@ -186,6 +187,10 @@ public class Main {
                 System.out.println("Au revoir !");
                 break;
             }
+            else {
+                System.out.println("Erreur, choix invalide");
+            }
         }
+        sc.close();
     }
 }

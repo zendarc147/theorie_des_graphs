@@ -181,6 +181,10 @@ public class Main {
                 System.out.println("Au revoir !");
                 break;
             }
+            else {
+                System.out.println("Erreur, choix invalide");
+            }
         }
+        sc.close();
     }
 }
