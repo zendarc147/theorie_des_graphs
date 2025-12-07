@@ -1,0 +1,20 @@
+# Problématique 2 : Collecte des poubelles
+# HO3 : Graphe mixte (combinaison de rues différentes)
+# CAS IDÉAL : Tous les sommets ont deg_in = deg_out
+#
+# Graphe de test principal pour HO3
+
+SOMMETS: 4
+
+# Mélange de 3 types de rues :
+# - RUE : double sens, 1 voie (ramassage 2 côtés en 1 passage, +1 in +1 out)
+# - RUE_DOUBLE : double sens, plusieurs voies (2 passages, +1 in +1 out chacun)
+# - RUE_ORIENTEE : sens unique (1 passage, +1 out pour départ, +1 in pour arrivée)
+
+# Cycle principal avec RUE (arêtes non orientées)
+RUE 0 1 Petite-Rue-A
+RUE 1 2 Petite-Rue-B
+RUE 2 3 Petite-Rue-C
+RUE 3 0 Petite-Rue-D
+
+# Tous les sommets ont maintenant deg_in=2 et deg_out=2 grâce aux 4 RUE
