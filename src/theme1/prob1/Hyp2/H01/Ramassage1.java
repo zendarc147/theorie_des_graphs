@@ -22,21 +22,11 @@ public class Ramassage1 {
     //Algo TSP : distance minimale pour la tournée en testant les permutations
     public int tspDistance(){
         //on ne doit pas permutter le centre, seulement les maisons
+        //maisons à permutter
         List<Integer> permutable = new ArrayList<>(part);
+        //ttes les permutations
         List<List<Integer>> tt = new ArrayList<>();
         permuter(permutable,0,tt);
-
-        /*
-        //debut au centre de traitement
-        noeud.add(0,centre);
-        //fin au centre de traitement
-        noeud.add(centre);
-
-        //on veut seulement toucher aux maisons (ne pas changer les premier et dernier index qui sont le centre)
-        List<List<Integer>> perm = new ArrayList<>();
-        //permuter seulement entre index 1 (inclus) et inndex n-1 (inclus)
-        permuter(noeud.subList(1,noeud.size()-1), 0, perm);*/
-        //distance min est initialisée a l'infini
 
         int meilleur = Integer.MAX_VALUE;
         List<Integer> meilleurChemin = null;
@@ -121,11 +111,11 @@ public class Ramassage1 {
         //retourner la distance
         return d[destination];
     }
-    //générer les permutations possibles (TPS)
+    //générer les permutations possibles d'une liste (TPS)
     private void permuter(List<Integer> m, int p, List<List<Integer>> perm){
         //si la permutation est terminée
         if (p == m.size()-1){
-            //on copie les permutations pour mettre dans la liste des permutations
+            //on copie la permutation terminee pour mettre dans la liste des permutations
             perm.add(new ArrayList<>(m));
             return;
         }

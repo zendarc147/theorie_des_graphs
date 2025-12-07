@@ -52,8 +52,9 @@ public class Main21 {
         //liste des demandes de ramassage
         List<Integer> demandes = new ArrayList<>();
 
-        //liste des tournées (max 10 ramassage par tournee)
+        //liste des tournées (10 ramassage par tournee)
         List<List<Integer>> tournees = new ArrayList<>();
+
         //date premiere tournee
         int date = 1;
 
@@ -63,18 +64,17 @@ public class Main21 {
 
         while (true) {
             System.out.println("\n--- Menu ---");
-            System.out.println("1. Client : demander un ramassage");
-            System.out.println("2. Mairie : voir toutes les tournées");
+            System.out.println("1. Demander un ramassage");
+            System.out.println("2. Voir toutes les tournées");
             System.out.println("3. Quitter");
             System.out.print("Votre choix : ");
             int choix = sc.nextInt();
 
             if (choix == 1) {
-                // Client : ajouter sa maison
                 System.out.print("Entrez le sommet correspondant à votre maison : ");
                 int maison = sc.nextInt();
 
-                //ajouter la maison entree par le client
+                //ajouter maison du client a liste des demandes
                 demandes.add(maison);
 
                 //regarder si on peut faire une nouvelle tournee (10 maisons)
@@ -82,7 +82,7 @@ public class Main21 {
                     //creer une tournee
                     //prendre les 10 prochaines maisons pas encore ramassées
                     List<Integer> t = new ArrayList<>(demandes.subList(index,index+10));
-                    //ajout de la liste ds tournee
+                    //ajouter la tournee à la liste des tournees
                     tournees.add(t);
 
                     System.out.println("nouvelle tournee pour date : "+ date);
@@ -103,8 +103,11 @@ public class Main21 {
                 int d =1;
                 for(List<Integer> t : tournees){
                     System.out.println("tournee de la date "+ d + " : " + t);
+                    // creer objet Ramassage1 pour calculer le tsp
                     Ramassage1 ramassage = new Ramassage1(g,t,centre);
+                    //chemin optimal
                     List<Integer> chemin = ramassage.tspChemin();
+                    //distance totale
                     int distance = ramassage.tspDistance();
                     System.out.println("chemin de la tournee :" + chemin + "\n");
                     System.out.println("distance de la tournee :" + distance + " unites \n");
