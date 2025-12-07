@@ -7,12 +7,24 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        executer(null);
+    }
+
+    public static void executer(Scanner scannerExterne) {
         System.out.println("╔════════════════════════════════════════════════════════════╗");
         System.out.println("║  PROBLÉMATIQUE 2 : Collecte des poubelles                  ║");
         System.out.println("║  HO1 : Graphe non orienté (rues à double sens)             ║");
         System.out.println("╚════════════════════════════════════════════════════════════╝");
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner;
+        boolean fermerScanner = false;
+
+        if (scannerExterne != null) {
+            scanner = scannerExterne;
+        } else {
+            scanner = new Scanner(System.in);
+            fermerScanner = true;
+        }
 
         System.out.println("\n=== Sélection du cas à traiter ===");
         System.out.println("1. CAS 1 - Tous les sommets de degrés pairs (Cycle eulérien)");
@@ -20,8 +32,7 @@ public class Main {
         System.out.println("3. CAS 3 - Cas général (Postier chinois)");
         System.out.print("\nVotre choix (1-3) : ");
 
-        int choix = scanner.nextInt();
-        scanner.close();
+        int choix = Integer.parseInt(scanner.nextLine());
 
         String fichier;
         String typeCas;
@@ -85,5 +96,9 @@ public class Main {
         System.out.println("\n" + "=".repeat(60));
         System.out.println("FIN DU TRAITEMENT");
         System.out.println("=".repeat(60));
+
+        if (fermerScanner) {
+            scanner.close();
+        }
     }
 }

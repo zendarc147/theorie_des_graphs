@@ -153,8 +153,41 @@ public class Main {
                     if (typeUtilisateur == 1) {
                         System.out.println(">> Affichage des informations sur la collecte des poubelles (vue Utilisateur)...");
                     } else {
-                        System.out.println(">> Lancement de l'optimisation de la collecte des poubelles (Thème 1 / Prob 2)...");
+                        menuProblematique2(scanner);
                     }
+                    break;
+                case 0:
+                    retour = true;
+                    break;
+                default:
+                    System.out.println("Choix invalide, réessayez.");
+            }
+        }
+    }
+
+    private static void menuProblematique2(Scanner scanner) {
+        boolean retour = false;
+        while (!retour) {
+            System.out.println("\n--- Problématique 2 : Collecte des poubelles (Hypothèses) ---");
+            System.out.println("1 - HO1 : Graphe non orienté (rues à double sens)");
+            System.out.println("2 - HO2 : Graphe orienté (rues à sens unique)");
+            System.out.println("3 - HO3 : Graphe mixte (combinaison)");
+            System.out.println("0 - Retour");
+            System.out.print("Votre choix : ");
+
+            int choix = Integer.parseInt(scanner.nextLine());
+            switch (choix) {
+                case 1:
+                    System.out.println(">> Lancement de HO1...\n");
+                    theme1.prob2.HO1.Main.executer(scanner);
+                    break;
+                case 2:
+                    System.out.println(">> Lancement de HO2...\n");
+                    theme1.prob2.HO2.Main.executer(scanner);
+                    break;
+                case 3:
+                    System.out.println(">> Lancement de HO3...\n");
+                    theme1.prob2.HO3.Main.executer(scanner);
                     break;
                 case 0:
                     retour = true;
@@ -225,8 +258,8 @@ public class Main {
             } else {
                 // Version COLLECTIVITÉ
                 System.out.println("\n--- Thème 3 (Collectivité) : Planification des jours de passage ---");
-                System.out.println("1 - Contraintes géographiques (voisinage des secteurs)");
-                System.out.println("2 - Contraintes de capacité (déchets, camions, charges)");
+                System.out.println("1 - Hypothèse 1 : Contraintes géographiques (voisinage des secteurs)");
+                System.out.println("2 - Hypothèse 2 : Contraintes de capacité (déchets, camions, charges)");
             }
 
             System.out.println("0 - Retour au menu principal");
@@ -238,14 +271,16 @@ public class Main {
                     if (typeUtilisateur == 1) {
                         System.out.println(">> Affichage des jours de passage pour le quartier (vue Utilisateur)...");
                     } else {
-                        System.out.println(">> Planification avec contraintes géographiques...");
+                        System.out.println(">> Lancement de l'Hypothèse 1 (Contraintes géographiques)...\n");
+                        theme3.hypothese1.Main.executer(scanner);
                     }
                     break;
                 case 2:
                     if (typeUtilisateur == 1) {
                         System.out.println(">> Simulation de changement de jour de passage (vue Utilisateur)...");
                     } else {
-                        System.out.println(">> Planification avec contraintes de capacité...");
+                        System.out.println(">> Lancement de l'Hypothèse 2 (Contraintes de capacité)...\n");
+                        theme3.hypothese2.Main.executer(scanner);
                     }
                     break;
                 case 0:
