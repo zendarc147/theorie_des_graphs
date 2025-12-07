@@ -117,7 +117,7 @@ public class Mt22Citoyen {
 
     private static int calculerChargeTournee(List<String> chemin, Map<String, Integer> contenances, String depot) {
         int charge = 0;
-        //boucle classique avec index sur List (pas besoin de conversion)
+        
         for (int i = 0; i < chemin.size(); i++) {
             String sommet = chemin.get(i);
             if (!sommet.equals(depot)) {

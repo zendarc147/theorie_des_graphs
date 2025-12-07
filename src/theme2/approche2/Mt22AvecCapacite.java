@@ -10,7 +10,7 @@ public class Mt22AvecCapacite {
     public static void main(String[] args) {
         try {
             GrapheNonOriente graphe = new GrapheNonOriente();
-            graphe.chargerFichier("data/graphe_reel_theme2.txt");
+            graphe.chargerFichier("data/graphe_reel_theme2.txt");//on prends le graphe réel ici
 
             System.out.println("=== Recolte des dechets aux points de collecte ===");
             System.out.println("Méthode 2: MST avec contrainte de capacité");
@@ -20,7 +20,7 @@ public class Mt22AvecCapacite {
             String depot = "0";
             System.out.println("Dépôt: Sommet " + depot);
 
-            Map<String, Integer> contenances = genererContenancesAleatoires(graphe.getSommet(), depot);
+            Map<String, Integer> contenances = genererContenancesAleatoires(graphe.getSommet(), depot);//on mets de contenances au hasard
             int capaciteMax = 10;
 
             System.out.println("\n=== Configuration ===");
