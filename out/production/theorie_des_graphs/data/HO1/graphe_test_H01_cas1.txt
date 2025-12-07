@@ -1,0 +1,44 @@
+# Problématique 2 : Collecte des poubelles
+# HO1 : Graphe non orienté (toutes les rues à double sens)
+# CAS IDÉAL : Tous les sommets sont de degrés pairs
+#
+# Graphe de test principal pour HO1 — version étendue
+
+SOMMETS: 10
+
+# Réseau de rues formant un décagone avec diagonales et triangles
+# Tous les sommets ont un degré pair (2, 4, 6...)
+
+# Cycle principal (10 sommets en boucle)
+RUE 0 1 Avenue-des-Champs
+RUE 1 2 Rue-Principale
+RUE 2 3 Boulevard-du-Parc
+RUE 3 4 Rue-des-Écoles
+RUE 4 5 Avenue-de-la-Gare
+RUE 5 6 Rue-de-la-Rivière
+RUE 6 7 Boulevard-des-Cèdres
+RUE 7 8 Rue-des-Acacias
+RUE 8 9 Avenue-des-Sports
+RUE 9 0 Rue-Nationale
+
+# Grand cycle intérieur (sauts de 2 sommets)
+RUE 0 2 Passage-Central
+RUE 2 4 Allée-Traversière
+RUE 4 6 Voie-Interquartier
+RUE 6 8 Passage-des-Pins
+RUE 8 0 Rue-du-Triangle
+
+# Triangle local autour de 1, 3 et 5
+RUE 1 3 Rue-du-Marché
+RUE 3 5 Rue-des-Fleurs
+RUE 5 1 Rue-de-l’Église
+
+# Triangle local autour de 2, 5 et 8
+RUE 2 5 Allée-des-Jardins
+RUE 5 8 Rue-des-Rosiers
+RUE 8 2 Rue-du-Belvédère
+
+# Triangle local autour de 0, 4 et 7
+RUE 0 4 Avenue-de-la-Prairie
+RUE 4 7 Rue-des-Pierres
+RUE 7 0 Chemin-des-Plateaux

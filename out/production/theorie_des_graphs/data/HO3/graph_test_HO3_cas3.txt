@@ -1,0 +1,80 @@
+# Problématique 2 : Collecte des poubelles
+# HO3 : Graphe mixte (combinaison de rues différentes)
+# CAS : Aucune contrainte sur les degrés des sommets
+#
+# Graphe de test "brouillon" pour HO3 — degrés déséquilibrés
+
+SOMMETS: 10
+
+# Mélange de 3 types de rues :
+# - RUE : double sens, 1 voie (ramassage 2 côtés en 1 passage, +1 in +1 out)
+# - RUE_DOUBLE : double sens, plusieurs voies (2 passages, +1 in +1 out chacun)
+# - RUE_ORIENTEE : sens unique (1 passage, +1 out au départ, +1 in à l’arrivée)
+
+# ---------------------------------------------------------------------------
+# PETIT CŒUR DE VILLE (0–1–2–3) — mélange de RUE et RUE_ORIENTEE
+# ---------------------------------------------------------------------------
+
+RUE 0 1 Petite-Rue-A
+RUE 1 2 Petite-Rue-B
+RUE 2 3 Petite-Rue-C
+RUE 3 0 Petite-Rue-D
+
+RUE_ORIENTEE 0 2 Sens-Unique-Place-Centrale
+RUE_ORIENTEE 1 3 Sens-Unique-Rue-Haute
+RUE_ORIENTEE 2 0 Sens-Unique-Rue-Basse
+
+# 0,1,2,3 ont déjà des degrés très différents, ce n’est pas équilibré exprès.
+
+# ---------------------------------------------------------------------------
+# GRANDES AVENUES À DOUBLE SENS (RUE_DOUBLE) — HUBS DÉSÉQUILIBRÉS
+# ---------------------------------------------------------------------------
+
+RUE_DOUBLE 0 4 Avenue-Duplex-Nord
+RUE_DOUBLE 0 5 Avenue-Duplex-Ouest
+RUE_DOUBLE 2 6 Avenue-Duplex-Est
+RUE_DOUBLE 3 7 Boulevard-Duplex-Sud
+
+# 0 devient un gros carrefour, 2 et 3 aussi, les sommets 4–7 commencent à être connectés.
+
+# ---------------------------------------------------------------------------
+# BRANCHES VERS LA PÉRIPHÉRIE (4,5,6,7,8,9)
+# ---------------------------------------------------------------------------
+
+# Quartier résidentiel autour de 4, 5 et 8
+RUE 4 5 Rue-des-Jardins
+RUE 5 8 Rue-des-Roses
+RUE_ORIENTEE 8 4 Sens-Unique-Impasse-des-Roses
+
+# Zone artisanale autour de 6, 7 et 9
+RUE 6 7 Rue-des-Ateliers
+RUE 7 9 Rue-des-Entrepots
+RUE_ORIENTEE 9 6 Sens-Unique-Camions
+
+# Liaison un peu random entre 5 et 9
+RUE 5 9 Rue-Interquartiers
+
+# ---------------------------------------------------------------------------
+# LIENS LONGUE DISTANCE BIZARRES (CASSENT TOUT ÉQUILIBRE)
+# ---------------------------------------------------------------------------
+
+RUE_ORIENTEE 4 1 Rocade-Nord
+RUE_ORIENTEE 6 2 Rocade-Est
+RUE_ORIENTEE 7 1 Rocade-Sud
+RUE_ORIENTEE 8 3 Rocade-Ouest
+
+RUE 8 6 Chemin-des-Bois
+RUE 9 2 Chemin-des-Camions
+RUE_DOUBLE 5 3 Voie-Rapide-Centre
+
+# ---------------------------------------------------------------------------
+# QUELQUES AJOUTS POUR ENCORE PLUS DE CHAOS
+# ---------------------------------------------------------------------------
+
+RUE_ORIENTEE 1 0 Sens-Unique-Retour-Place
+RUE_ORIENTEE 3 6 Sens-Unique-Pont
+RUE_ORIENTEE 4 7 Sens-Unique-Coteaux
+RUE_ORIENTEE 9 0 Sens-Unique-Autoroute
+
+RUE 2 5 Rue-des-Poubelles
+RUE 4 6 Rue-des-Bennes

@@ -1,0 +1,22 @@
+# Graphe pour l'hypothèse 2 avec quantités de déchets
+# Format: SECTEUR id nom quantite
+
+SECTEURS: 6
+
+# Secteurs avec quantités de déchets
+SECTEUR 0 Centre-Ville 80
+SECTEUR 1 Quartier-Nord 50
+SECTEUR 2 Quartier-Est 60
+SECTEUR 3 Quartier-Sud 70
+SECTEUR 4 Quartier-Ouest 40
+SECTEUR 5 Zone-Industrielle 90
+
+# Relations de voisinage
+VOISINS 0 1
+VOISINS 0 2
+VOISINS 0 3
+VOISINS 0 4
+VOISINS 1 2
+VOISINS 2 3
+VOISINS 3 4
+VOISINS 4 5

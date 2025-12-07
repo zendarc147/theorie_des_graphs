@@ -1,6 +1,12 @@
+import theme2.approche1.Mt2;
+import theme2.approche1.Mt2Citoyen;
+import theme2.approche2.Mt22;
+import theme2.approche2.Mt22AvecCapacite;
+import theme2.approche2.Mt22Citoyen;
+
 import java.util.Scanner;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean quitter = false;
@@ -182,16 +188,20 @@ public class main {
             switch (choix) {
                 case 1:
                     if (typeUtilisateur == 1) {
-                        System.out.println(">> Visualisation de la tournée des points de collecte (vue Utilisateur)...");
+                        System.out.println(">> Visualisation de la tournée des points de collecte (vue Utilisateur)...\n");
+                        Mt2Citoyen.main(new String[0]);
                     } else {
-                        System.out.println(">> Lancement de l'approche Plus proche voisin...");
+                        System.out.println(">> Lancement de l'approche Plus proche voisin...\n");
+                        Mt2.main(new String[0]);
                     }
                     break;
                 case 2:
                     if (typeUtilisateur == 1) {
-                        System.out.println(">> Comparaison de plusieurs trajets de collecte (vue Utilisateur)...");
+                        System.out.println(">> Comparaison de plusieurs trajets de collecte (vue Utilisateur)...\n");
+                        Mt22Citoyen.main(new String[0]);
                     } else {
-                        System.out.println(">> Lancement de l'approche MST...");
+                        System.out.println(">> Lancement de l'approche MST...\n");
+                        Mt22AvecCapacite.main(new String[0]);
                     }
                     break;
                 case 0:
