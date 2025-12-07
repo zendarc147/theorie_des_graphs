@@ -37,11 +37,14 @@ public class Ramassage2 {
         //on ne doit pas permutter le centre, seulement les maisons
         List<Integer> sommets = new ArrayList<>();
         for(Maison2 m : maisonRamassable){
+            //permutter sommet depart des maisons
             sommets.add(m.depart);
         }
+        //faire ttes les permutations possibles des maisons
         List<List<Integer>> tt = new ArrayList<>();
         permuter(sommets,0,tt);
 
+        //initialisation distance min à l'infini
         int meilleur = Integer.MAX_VALUE;
         List<Integer> meilleurChemin = null;
 
@@ -59,7 +62,7 @@ public class Ramassage2 {
                 distance += dist;
             }
 
-            //maisons ds l'ordre
+            // distance entre les maisons ds l'ordre
             for (int i =0; i<p.size()-1 && cheminVal;i++){
                 if(dist == Integer.MAX_VALUE){
                     cheminVal = false;
@@ -83,8 +86,11 @@ public class Ramassage2 {
                 meilleur = distance;
 
                 meilleurChemin = new ArrayList<>();
+                //debut au centre
                 meilleurChemin.add(centre);
+                //ajout des maison ds l'ordre
                 meilleurChemin.addAll(p);
+                //retour au centre
                 meilleurChemin.add(centre);
             }
         }
@@ -143,7 +149,9 @@ public class Ramassage2 {
 
         //tableau des distances depuis la source
         int[] d = new int[n];
+        //initialisation dist infini
         Arrays.fill(d,Integer.MAX_VALUE);
+        //distance de la source (a elle meme)
         d[source]=0;
 
         // file de prioritee pour prendre le sommet le plus proche non visité

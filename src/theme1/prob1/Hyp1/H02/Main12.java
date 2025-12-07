@@ -1,12 +1,13 @@
-package src.theme1.prob1.Hyp1.H03;
+package src.theme1.prob1.Hyp1.H02;
 
 import java.util.*;
 
-public class Main {
-
+public class Main12 {
     //Construire le chemin
     public static List<Integer> Chemin(int[] pred, int destination){
+        //liste pour stocker le chemin
         List<Integer> chemin = new ArrayList<>();
+        // act c'est le sommet actuel
         int act = destination;
         //tant que l'arrête de départ n'est pas atteinte, on prend le prédecesseur jusqu'à arriver à la source (chemin fait à l'envers)
         while(act!=-1){
@@ -19,16 +20,17 @@ public class Main {
         return chemin;
     }
 
-    //relier la maison au graphe (H03)
-    public static void maisonGraphe(Routes3 r, Maison3 m){
+    //relier la maison au graphe (H02)
+    public static void maisonGraphe(Routes2 r, Maison2 m){
 
         int u = m.depart;
         int v = m.arrive;
 
         // verifier si la rue existe bien ds le graphe
-        Sortie3 arc = null;
-        for (Sortie3 s : r.Adj().get(u)){
+        Sortie2 arc = null;
+        for (Sortie2 s : r.Adj().get(u)){
             if (s.numr == v){
+                //arete existe
                 arc = s;
                 break;
             }
@@ -36,18 +38,24 @@ public class Main {
         //si l'arête n'existe pas
         if (arc == null){
             System.out.println("La rue indique n'existe pas...");
+            //impossible de passer par la maison
+            m.verif =1;
             return;
         }
-        //si double sens et 1 voie
-        if (arc.doublesens && arc.voies == 1){
-            r.ajouterRouteSensUnique(u,m.id,arc.poids,1);
-            r.ajouterRouteSensUnique(m.id,v,arc.poids,1);
-            r.ajouterRouteSensUnique(v,m.id,arc.poids,1);
-            r.ajouterRouteSensUnique(m.id,u,arc.poids,1);
+        //si double sens (2 voies)
+        if (arc.doublesens){
+            if(m.coteG){
+                r.ajouterRouteSensUnique(v,m.id,arc.poids);
+                r.ajouterRouteSensUnique(m.id,u,arc.poids);
+            }
+            else{
+                r.ajouterRouteSensUnique(u,m.id,arc.poids);
+                r.ajouterRouteSensUnique(m.id,v,arc.poids);
+            }
             return;
         }
         //si sens unique
-        if(!arc.doublesens && arc.voies == 1){
+        if(!arc.doublesens){
             // coté non autorisé
             if(m.coteG){
                 System.out.println("rue a sens unique, impossible de ramasser à gauche");
@@ -56,24 +64,11 @@ public class Main {
                 return;
             }
             //si à droite
-            r.ajouterRouteSensUnique(u,m.id,arc.poids,1);
-            r.ajouterRouteSensUnique(m.id,v,arc.poids,1);
+            r.ajouterRouteSensUnique(u,m.id,arc.poids);
+            r.ajouterRouteSensUnique(m.id,v,arc.poids);
             return;
         }
-
-        //si double sens et 2 voies
-        if (m.coteG){
-            //si cote gauche alors le sens c'est v > maison > u
-            r.ajouterRouteSensUnique(v,m.id,arc.poids,arc.voies);
-            r.ajouterRouteSensUnique(m.id,u,arc.poids,arc.voies);
-        }
-        else {
-            //si cote droit alors le sens c'est u > maison > v
-            r.ajouterRouteSensUnique(u,m.id,arc.poids,arc.voies);
-            r.ajouterRouteSensUnique(m.id,v,arc.poids,arc.voies);
-        }
     }
-
 
     //main principal
     public static void main(String[] args) {
@@ -81,56 +76,54 @@ public class Main {
         Scanner sc = new Scanner (System.in);
 
         //creation graphe pour test
-
         //25 sommets
-        Routes3 gt = new Routes3(25);
+        Routes2 gt = new Routes2(25);
 
         //on ajoute les arrêtes
-        gt.ajouterRouteDoublesens(1, 2, 4,1);
-        gt.ajouterRouteDoublesens(2, 3, 2,2);
-        gt.ajouterRouteDoublesens(2, 6, 5,1);
-        gt.ajouterRouteDoublesens(6, 5, 1,1);
-        gt.ajouterRouteDoublesens(5, 4, 7,1);
-        gt.ajouterRouteDoublesens(5, 12, 3,1);
-        gt.ajouterRouteDoublesens(6, 7, 1,1);
-        gt.ajouterRouteDoublesens(7, 8, 6,1);
-        gt.ajouterRouteSensUnique(9, 8, 3,1);
-        gt.ajouterRouteSensUnique(10, 9, 1,1);
-        gt.ajouterRouteDoublesens(10, 11, 7,1);
-        gt.ajouterRouteSensUnique(13, 5, 3,1);
-        gt.ajouterRouteDoublesens(6, 14, 1,2);
-        gt.ajouterRouteDoublesens(7, 16, 4,1);
-        gt.ajouterRouteDoublesens(8, 17, 3,2);
-        gt.ajouterRouteDoublesens(16, 17, 1,1);
-        gt.ajouterRouteDoublesens(15, 16, 7,1);
-        gt.ajouterRouteDoublesens(14, 15, 3,1);
-        gt.ajouterRouteDoublesens(13, 14, 1,1);
-        gt.ajouterRouteDoublesens(13, 21, 4,1);
-        gt.ajouterRouteDoublesens(14, 20, 3,1);
-        gt.ajouterRouteSensUnique(19, 15, 2,1);
-        gt.ajouterRouteDoublesens(16, 19, 4,1);
-        gt.ajouterRouteDoublesens(10, 18, 3,1);
-        gt.ajouterRouteDoublesens(18, 19, 2,1);
-        gt.ajouterRouteDoublesens(19, 20, 3,1);
-        gt.ajouterRouteDoublesens(20, 21, 3,1);
-        gt.ajouterRouteDoublesens(21, 22, 1,2);
-        gt.ajouterRouteSensUnique(20, 23, 5,1);
-        gt.ajouterRouteDoublesens(19, 24, 3,2);
-        gt.ajouterRouteSensUnique(18, 0, 1,1);
-        gt.ajouterRouteDoublesens(24, 0, 2,2);
-        gt.ajouterRouteDoublesens(23, 24, 3,1);
+        gt.ajouterRouteDoublesens(1, 2, 4);
+        gt.ajouterRouteDoublesens(2, 3, 2);
+        gt.ajouterRouteDoublesens(2, 6, 5);
+        gt.ajouterRouteDoublesens(6, 5, 1);
+        gt.ajouterRouteDoublesens(5, 4, 7);
+        gt.ajouterRouteDoublesens(5, 12, 3);
+        gt.ajouterRouteDoublesens(6, 7, 1);
+        gt.ajouterRouteDoublesens(7, 8, 6);
+        gt.ajouterRouteSensUnique(9, 8, 3);
+        gt.ajouterRouteSensUnique(10, 9, 1);
+        gt.ajouterRouteDoublesens(10, 11, 7);
+        gt.ajouterRouteSensUnique(13, 5, 3);
+        gt.ajouterRouteDoublesens(6, 14, 1);
+        gt.ajouterRouteDoublesens(7, 16, 4);
+        gt.ajouterRouteDoublesens(8, 17, 3);
+        gt.ajouterRouteDoublesens(16, 17, 1);
+        gt.ajouterRouteDoublesens(15, 16, 7);
+        gt.ajouterRouteDoublesens(14, 15, 3);
+        gt.ajouterRouteDoublesens(13, 14, 1);
+        gt.ajouterRouteDoublesens(13, 21, 4);
+        gt.ajouterRouteDoublesens(14, 20, 3);
+        gt.ajouterRouteSensUnique(19, 15, 2);
+        gt.ajouterRouteDoublesens(16, 19, 4);
+        gt.ajouterRouteDoublesens(10, 18, 3);
+        gt.ajouterRouteDoublesens(18, 19, 2);
+        gt.ajouterRouteDoublesens(19, 20, 3);
+        gt.ajouterRouteDoublesens(20, 21, 3);
+        gt.ajouterRouteDoublesens(21, 22, 1);
+        gt.ajouterRouteSensUnique(20, 23, 5);
+        gt.ajouterRouteDoublesens(19, 24, 3);
+        gt.ajouterRouteSensUnique(18, 0, 1);
+        gt.ajouterRouteDoublesens(24, 0, 2);
+        gt.ajouterRouteDoublesens(23, 24, 3);
 
         //sommet de départ du camion
         int depart = 1;
 
         // Demandes des clients (sommet -> maison)
-        List<Maison3> demandes = new ArrayList<>();
+        List<Maison2> demandes = new ArrayList<>();
 
-        //menu (chatgpt)
         while (true) {
             System.out.println("\n--- Menu ---");
-            System.out.println("1. Client : demander un enlèvement");
-            System.out.println("2. Entreprise : voir toutes les demandes");
+            System.out.println("1. Demander un enlèvement");
+            System.out.println("2. Voir toutes les demandes");
             System.out.println("3. Quitter");
             System.out.print("Votre choix : ");
             int choix = sc.nextInt();
@@ -144,21 +137,23 @@ public class Main {
                 boolean coteGauche = sc.nextBoolean();
 
                 //creer et ajouter la maison
-                Maison3 m = new Maison3(departMaison, arriveeMaison, coteGauche);
-                //sommet
+                Maison2 m = new Maison2(departMaison, arriveeMaison, coteGauche);
+                //sommet ajouté avec son indice
                 m.id = gt.ajouterMaison();
+                //relier maison au graphe
                 maisonGraphe(gt, m);
+                //ajouter à liste des demandes
                 demandes.add(m);
 
                 //calcul chemin avec Dijkstra
-                DijkstraDonnees3 chem = Dijkstra3.calculpcc(gt, depart);
+                DijkstraDonnees2 chem = Dijkstra2.calculpcc(gt, depart);
                 List<Integer> chemin = Chemin(chem.pred, m.id);
 
                 if(m.verif !=1){
 
                     int centre = depart;
                     //faire Dijkstra sur le retour : de la maison au centre
-                    DijkstraDonnees3 chemRetour = Dijkstra3.calculpcc(gt, m.id);
+                    DijkstraDonnees2 chemRetour = Dijkstra2.calculpcc(gt, m.id);
                     //reconstitution chemin retour
                     List<Integer> cheminRetour = Chemin(chemRetour.pred,centre);
 
@@ -187,17 +182,17 @@ public class Main {
                 System.out.println("\n--- Liste des demandes ---");
 
                 //calcul du chemin
-                DijkstraDonnees3 chem = Dijkstra3.calculpcc(gt, depart);
+                DijkstraDonnees2 chem = Dijkstra2.calculpcc(gt, depart);
 
-                for (Maison3 m : demandes) {
+                for (Maison2 m : demandes) {
                     List<Integer> chemin = Chemin(chem.pred,m.id);
-
                     System.out.println("Maison sur " + m.depart + "->" + m.arrive + ", cote : " + (m.coteG?"gauche":"droit"));
+
                     if(m.verif !=1){
 
                         int centre = depart;
                         //faire Dijkstra sur le retour : de la maison au centre
-                        DijkstraDonnees3 chemRetour = Dijkstra3.calculpcc(gt, m.id);
+                        DijkstraDonnees2 chemRetour = Dijkstra2.calculpcc(gt, m.id);
                         //reconstitution chemin retour
                         List<Integer> cheminRetour = Chemin(chemRetour.pred,centre);
 
@@ -216,6 +211,7 @@ public class Main {
                         System.out.println("Impossible car mauvais cote\n");
                     }
                 }
+
             } else if (choix == 3) {
                 System.out.println("Au revoir !");
                 break;

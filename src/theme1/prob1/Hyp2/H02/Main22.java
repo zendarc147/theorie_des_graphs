@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class Main22 {
 
     public static void main(String[] args) {
         //creer le graphe
@@ -55,19 +55,19 @@ public class Main {
         //liste des demandes de ramassage
         List<Maison2> demandes = new ArrayList<>();
 
-        //liste des tournées (max 10 ramassage par tournee)
+        //liste des tournées (10 ramassage par tournee)
         List<List<Maison2>> tournees = new ArrayList<>();
         //date premiere tournee
         int date = 1;
 
-        // Menu (aide chatGPT)
         //index pour les maisons déjà planifié en tournee (ne pas leur planifier plusieurs tournees)
         int index =0;
 
+        // Menu (aide chatGPT)
         while (true) {
             System.out.println("\n--- Menu ---");
-            System.out.println("1. Client : demander un ramassage");
-            System.out.println("2. Mairie : voir toutes les tournées");
+            System.out.println("1. Demander un ramassage");
+            System.out.println("2. Voir toutes les tournées");
             System.out.println("3. Quitter");
             System.out.print("Votre choix : ");
             int choix = sc.nextInt();
@@ -93,6 +93,7 @@ public class Main {
                     System.out.println("Impossible de ramasser votre maison car le camion ne peut pas passer du bon côté.");
                 } else {
                     System.out.println("Maison ajoutée pour le ramassage.");
+                    //ajouter maison a la liste demandes
                     demandes.add(m);
 
                     //regarder si on peut faire une nouvelle tournee (10 maisons)
@@ -122,6 +123,7 @@ public class Main {
                 int d =1;
                 for(List<Maison2> t : tournees){
                     System.out.println("tournee de la date "+ d + " : " + t);
+                    //calcul chemin et distance de la tournee
                     Ramassage2 ramassage = new Ramassage2(g,t,centre);
                     List<Integer> chemin = ramassage.tspChemin();
                     int distance = ramassage.tspDistance();

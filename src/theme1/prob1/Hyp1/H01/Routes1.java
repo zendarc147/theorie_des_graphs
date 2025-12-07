@@ -7,15 +7,16 @@ public class Routes1 {
     //nombre de sommets du graphe
     private int n;
 
-    // liste des sorties (pour avoir les adjacences)
+    // liste des sorties (pour avoir les adjacences pour chaque sommet)
     private List<List<Sortie1>> sortie;
 
     //constructeur
     public Routes1(int n) {
         this.n = n;
-        //ArrayList de ArrayList (pour chaque sommet, il y a une liste des voisins adjacents)
+        //ArrayList de ArrayList (pour chaque sommet de la liste, il y a une liste des voisins adjacents)
+        //on initialise la liste globale des sommets vide
         sortie = new ArrayList<>();
-        //boucle pour initialiser tt les sommets avec liste vide
+        //boucle pour listes internes (donc initialise vide pour les voisins de chaque sommets)
         for (int i = 0; i < n; i++) {
             sortie.add(new ArrayList<>());
         }

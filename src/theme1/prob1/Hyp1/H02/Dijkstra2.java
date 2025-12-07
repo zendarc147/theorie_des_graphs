@@ -18,18 +18,21 @@ public class Dijkstra2 {
         //pour savoir si on est déjà passé par un sommet ou non
         boolean[] visite = new boolean[n];
 
-        //mettre les distances a infini (sauf celle de la source à 0) et la source à -1 pour les predecesseurs
+        //mettre les distances a infini (sauf celle de la source à 0) et -1 pour les predecesseurs
         Arrays.fill(distance, Integer.MAX_VALUE);
         distance[source] = 0;
         Arrays.fill(pred, -1);
         //file de priorité (avec indice du sommet et sa distance depuis la source): donne tjrs le sommet avec la plus petite distance
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+        //ajouter la source a la file
         pq.add(new int[]{source, 0});
 
         //boucle principale
         while (!pq.isEmpty()) {
+            //retirer sommet avec plus petite distance
             int[] element = pq.poll();
             int u = element[0];
+
             //si le sommet est visité alors on continue le chemin sans le re-marquer
             if(visite[u]) continue;
             // sinon on marque le sommet

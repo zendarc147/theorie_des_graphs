@@ -14,6 +14,7 @@ public class Graphe1 {
         this.nb = nb;
         adj = new ArrayList<>();
         for (int i = 0; i < nb; i++) {
+            //initialiser chaque sommet avec une liste vide
             adj.add(new ArrayList<>());
         }
     }

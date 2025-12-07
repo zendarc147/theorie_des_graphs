@@ -1,7 +1,7 @@
 package theme1.prob1.Hyp1.H01;
 
 public class DijkstraDonnees1 {
-    //la plus petite distance de source vers sommets
+    //la plus petite distance entre source et chaque sommet
     public int [] distance;
     // predecesseur du sommet actuel (sur le PCC)
     public int [] pred;
