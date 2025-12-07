@@ -164,11 +164,11 @@ public class Main {
                                         break;
                                     case 2:
                                         //prob1 hyp1 H02
-                                        src.theme1.prob1.Hyp1.H02.Main12.main(new String[]{});
+                                        theme1.prob1.Hyp1.H02.Main12.main(new String[]{});
                                         break;
                                     case 3:
                                         //prob 1 hyp1 H03
-                                        src.theme1.prob1.Hyp1.H03.Main13.main(new String[]{});
+                                        theme1.prob1.Hyp1.H03.Main13.main(new String[]{});
                                         break;
                                 }
                             case 2:
