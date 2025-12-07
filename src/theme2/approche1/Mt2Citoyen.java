@@ -9,41 +9,36 @@ public class Mt2Citoyen {
             GrapheNonOriente graphe = new GrapheNonOriente();
             graphe.chargerFichier("data/graphe_reel_theme2.txt");
 
-            System.out.println("╔════════════════════════════════════════════════════════════╗");
-            System.out.println("║     INFORMATION : Tournée de Collecte des Déchets         ║");
-            System.out.println("╚════════════════════════════════════════════════════════════╝");
+            System.out.println("════════════════════════════════════════════════════════════");
+            System.out.println("║    INFORMATION : Tournée de Collecte des Déchets         ║");
+            System.out.println("════════════════════════════════════════════════════════════");
             System.out.println();
-            System.out.println("📍 Nombre de points de collecte : " + (graphe.getSommet().size() - 1));
-            System.out.println("🚛 Point de départ : Centre de traitement");
+            System.out.println("  Nombre de points de collecte : " + (graphe.getSommet().size() - 1));
+            System.out.println(" Point de départ : Centre de traitement");
             System.out.println();
 
             String sommetDepart = "0";
             ItineraireVoyageur itineraire = AlgorithmePlusProcheVoisin.calculerItineraire(graphe, sommetDepart);
 
             System.out.println("═══════════════════════════════════════════════════════════");
-            System.out.println("           ITINÉRAIRE DU CAMION DE COLLECTE");
+            System.out.println("║           ITINÉRAIRE DU CAMION DE COLLECTE              ║");     
             System.out.println("═══════════════════════════════════════════════════════════");
             System.out.println();
 
             afficherItineraireSimple(itineraire);
 
-            System.out.println("\n📊 RÉSUMÉ");
+            System.out.println("\n RÉSUMÉ");
             System.out.println("─────────────────────────────────────────────────────────");
             double distanceKm = itineraire.getTotaleDistance() / 1000.0;
             System.out.println("Distance totale parcourue : " + String.format("%.2f", distanceKm) + " km");
             System.out.println("Nombre d'arrêts : " + (itineraire.getChemin().size() - 2));
 
-            int tempsEstime = (int) (distanceKm * 3 + itineraire.getChemin().size() * 5);
-            System.out.println("Temps estimé de la tournée : " + tempsEstime + " minutes");
-            System.out.println();
-
-            System.out.println("💡 Information utile :");
-            System.out.println("   Le camion passe par tous les points de collecte");
-            System.out.println("   en suivant l'itinéraire le plus court possible.");
+            System.out.println("   Information utile :");
+            System.out.println("   Le camion passe par tous les points de collecte en suivant l'itinéraire le plus court possible.");
             System.out.println();
 
         } catch (IOException e) {
-            System.err.println("❌ Erreur : Impossible de charger les données.");
+            System.err.println(" Erreur : Impossible de charger le fichier");
         }
     }
 
@@ -53,11 +48,11 @@ public class Mt2Citoyen {
             String point = itineraire.getChemin().get(i);
 
             if (i == 0) {
-                System.out.println("🏁 DÉPART : Centre de traitement");
+                System.out.println("   DÉPART : Centre de traitement"); //pour le premier
             } else if (i == itineraire.getChemin().size() - 1) {
-                System.out.println("🏁 RETOUR : Centre de traitement");
+                System.out.println("   RETOUR : Centre de traitement");//pour le dernier
             } else {
-                if (etape % 5 == 1) {
+                if (etape % 5 == 1) { //tout les 5 points on mets un grand espace
                     System.out.print("   ");
                 }
                 System.out.print("Point " + point);
@@ -66,7 +61,7 @@ public class Mt2Citoyen {
                     System.out.print(" → ");
                 }
 
-                if (etape % 5 == 0) {
+                if (etape % 5 == 0) {//puis on mets à la ligne
                     System.out.println();
                 }
                 etape++;

@@ -9,21 +9,27 @@ public class AlgorithmePlusProcheVoisin {
         Set<String> visite = new HashSet<>();
         int totalDistance = 0;
 
-        String som_actuel = sommetDepart;
+        String som_actuel = sommetDepart;//on commence au sommet de depart
         chemin.add(som_actuel);
         visite.add(som_actuel);
 
         while (visite.size() < graphe.getSommet().size()) {
+            //tant que le nombre de sommets visites est plus petit que le nombre de sommet du graphe
             String som_proche = null;
-            int minDistance = Integer.MAX_VALUE;
+            int minDistance = 100000;//grande valeur pour trouver forcément une valeur plus petite
 
-            for (String candidat : graphe.getSommet()) {
-                if (!visite.contains(candidat)) {
+            String[] sommetsArray = graphe.getSommet().toArray(new String[0]);//transforme en tableau
+            for (int i = 0; i < sommetsArray.length; i++) {
+                String candidat = sommetsArray[i];
+                if (!visite.contains(candidat)) {//s'il n'y as pas le candidat dans les sommets visités
                     int distanceDirecte = graphe.getPoid(som_actuel, candidat);
+                    //alors distane = le poids entre les sommets
 
                     if (distanceDirecte != -1 && distanceDirecte < minDistance) {
+                    //si la distance est plus petite que le minimum de distance
                         minDistance = distanceDirecte;
                         som_proche = candidat;
+                        //alors on remplace la distance minimum
                     }
                 }
             }
@@ -58,7 +64,6 @@ public class AlgorithmePlusProcheVoisin {
             }
 
             if (som_proche == null) {
-                System.out.println("Attention: Graphe non connexe - passage à une composante isolée");
                 for (String candidat : graphe.getSommet()) {
                     if (!visite.contains(candidat)) {
                         som_proche = candidat;

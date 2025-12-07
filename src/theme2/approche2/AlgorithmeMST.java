@@ -23,7 +23,7 @@ public class AlgorithmeMST {
 
         Collections.sort(aretes);
 
-        UnionFind uf = new UnionFind(graphe.getSommet());
+        UnionTrouve uf = new UnionTrouve(graphe.getSommet());
         List<Arete> mst = new ArrayList<>();
 
         for (Arete arete : aretes) {

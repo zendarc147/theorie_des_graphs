@@ -2,15 +2,17 @@ package theme2.approche2;
 
 import java.util.*;
 
-public class UnionFind {
+public class UnionTrouve {//classe qui nous permets de savoir si une union est trouvée
     private Map<String, String> parent;
     private Map<String, Integer> rang;
 
-    public UnionFind(Set<String> sommets) {
+    public UnionTrouve(Set<String> sommets) {
         parent = new HashMap<>();
         rang = new HashMap<>();
 
-        for (String sommet : sommets) {
+        String[] sommetstab = sommets.toArray(new String[0]);//on transforme en tableau
+        for (int i = 0; i < sommetstab.length; i++) {
+            String sommet = sommetstab[i];
             parent.put(sommet, sommet);
             rang.put(sommet, 0);
         }

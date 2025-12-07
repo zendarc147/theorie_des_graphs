@@ -1,4 +1,4 @@
-package src.theme1.prob1.Hyp1.H03;
+package theme1.prob1.Hyp1.H03;
 
 public class DijkstraDonnees3 {
 

@@ -1,4 +1,4 @@
-package src.theme1.prob1.Hyp2.H01;
+package theme1.prob1.Hyp2.H01;
 
 import java.util.*;
 

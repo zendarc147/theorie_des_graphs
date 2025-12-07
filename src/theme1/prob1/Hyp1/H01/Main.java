@@ -1,4 +1,4 @@
-package src.theme1.prob1.Hyp1.H01;
+package theme1.prob1.Hyp1.H01;
 import java.util.*;
 
 public class Main {
@@ -17,6 +17,23 @@ public class Main {
         // on retourne le chemin
         return chemin;
     }
+
+    /* Pour mettre le graphe ds un fichier texte
+
+    public static Routes chargerFichier(String nom) throws IOException {
+        Scanner sc = new Scanner(new File(nom));
+        int n = sc.nextInt();
+        Routes g = new Routes(n);
+
+        while (sc.hasNextInt()) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
+            int p = sc.nextInt();
+            g.ajouterRoute(u, v, p);
+        }
+        return g;
+    }
+    */
 
     //main principal
     public static void main(String[] args) {
@@ -82,20 +99,9 @@ public class Main {
 
                 DijkstraDonnees1 res = Dijkstra1.calculpcc(gt, depart);
                 List<Integer> chemin = Chemin(res.pred, maison);
-                //le chemin retour
-                List<Integer> cheminRetour = new ArrayList<>(chemin);
-                Collections.reverse(cheminRetour);
-                // memes distances
-                int distanceA = res.distance[maison];
-                int distanceR = distanceA;
 
-                //chemin complet
-                List<Integer> cheminComplet = new ArrayList<>(chemin);
-                cheminComplet.addAll(cheminRetour.subList(1, cheminRetour.size()));
-
-                System.out.println("Chemin le plus court : " + cheminComplet);
-                System.out.println("Distance totale : " + (distanceA + distanceR) + " unités");
-
+                System.out.println("Chemin le plus court : " + chemin);
+                System.out.println("Distance totale : " + res.distance[maison] + " unités");
             } else if (choix == 2) {
 
                 if (demandes.isEmpty()) {

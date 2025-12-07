@@ -119,7 +119,7 @@ public class Main {
         System.out.println("--------------------------------------------------");
     }
 
-    // -------- MENUS THEMATIQUES AVEC 2 VERSIONS --------
+    // -------- MENUS THEMATIQUES --------
 
     private static void menuTheme1(Scanner scanner, int typeUtilisateur) {
         boolean retour = false;

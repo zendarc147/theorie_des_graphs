@@ -1,4 +1,4 @@
-package src.theme1.prob1.Hyp1.H01;
+package theme1.prob1.Hyp1.H01;
 
 import java.util.ArrayList;
 import java.util.List;

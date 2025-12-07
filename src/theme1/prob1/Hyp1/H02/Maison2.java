@@ -1,4 +1,4 @@
-package src.theme1.prob1.Hyp1.H02;
+package theme1.prob1.Hyp1.H02;
 
 public class Maison2 {
 
