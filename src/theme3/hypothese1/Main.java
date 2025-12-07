@@ -29,34 +29,8 @@ public class Main {
             fermerScanner = true;
         }
 
-        System.out.println("\n=== Sélection du graphe de secteurs ===");
-        System.out.println("1. Graphe simple (secteurs_simple.txt)");
-        System.out.println("2. Graphe moyen (secteurs_moyen.txt)");
-        System.out.println("3. Graphe complexe (secteurs_complexe.txt)");
-        System.out.print("\nVotre choix (1-3) : ");
-
-        int choix = Integer.parseInt(scanner.nextLine());
-
-        String fichier;
-        String typeCas;
-
-        switch (choix) {
-            case 1:
-                fichier = "data/graphes_tests/secteurs_simple.txt";
-                typeCas = "Graphe simple";
-                break;
-            case 2:
-                fichier = "data/graphes_tests/secteurs_moyen.txt";
-                typeCas = "Graphe moyen";
-                break;
-            case 3:
-                fichier = "data/graphes_tests/secteurs_complexe.txt";
-                typeCas = "Graphe complexe";
-                break;
-            default:
-                System.err.println("Choix invalide !");
-                return;
-        }
+        String fichier = "data/graphes_tests/secteurs_simple.txt";
+        String typeCas = "Contraintes géographiques uniquement";
 
         System.out.println("\n" + "=".repeat(60));
         System.out.println("TRAITEMENT : " + typeCas);

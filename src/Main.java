@@ -152,6 +152,7 @@ public class Main {
                 case 2:
                     if (typeUtilisateur == 1) {
                         System.out.println(">> Affichage des informations sur la collecte des poubelles (vue Utilisateur)...");
+                        menuProblematique2(scanner);
                     } else {
                         menuProblematique2(scanner);
                     }
@@ -269,7 +270,8 @@ public class Main {
             switch (choix) {
                 case 1:
                     if (typeUtilisateur == 1) {
-                        System.out.println(">> Affichage des jours de passage pour le quartier (vue Utilisateur)...");
+                        System.out.println(">> Affichage des jours de passage pour le quartier (vue Utilisateur)...\n");
+                        theme3.hypothese1.Main.executer(scanner);
                     } else {
                         System.out.println(">> Lancement de l'Hypothèse 1 (Contraintes géographiques)...\n");
                         theme3.hypothese1.Main.executer(scanner);
@@ -277,7 +279,8 @@ public class Main {
                     break;
                 case 2:
                     if (typeUtilisateur == 1) {
-                        System.out.println(">> Simulation de changement de jour de passage (vue Utilisateur)...");
+                        System.out.println(">> Simulation de changement de jour de passage (vue Utilisateur)...\n");
+                        theme3.hypothese2.Main.executer(scanner);
                     } else {
                         System.out.println(">> Lancement de l'Hypothèse 2 (Contraintes de capacité)...\n");
                         theme3.hypothese2.Main.executer(scanner);

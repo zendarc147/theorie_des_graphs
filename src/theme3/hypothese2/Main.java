@@ -29,34 +29,8 @@ public class Main {
             fermerScanner = true;
         }
 
-        System.out.println("\n=== Sélection du graphe de secteurs ===");
-        System.out.println("1. Graphe H2 simple (secteurs_h2.txt)");
-        System.out.println("2. Graphe H2 moyen (secteurs_h2_moyen.txt)");
-        System.out.println("3. Graphe H2 complexe (secteurs_h2_complexe.txt)");
-        System.out.print("\nVotre choix (1-3) : ");
-
-        int choix = Integer.parseInt(scanner.nextLine());
-
-        String fichier;
-        String typeCas;
-
-        switch (choix) {
-            case 1:
-                fichier = "data/graphes_tests/secteurs_h2.txt";
-                typeCas = "Graphe H2 simple";
-                break;
-            case 2:
-                fichier = "data/graphes_tests/secteurs_h2_moyen.txt";
-                typeCas = "Graphe H2 moyen";
-                break;
-            case 3:
-                fichier = "data/graphes_tests/secteurs_h2_complexe.txt";
-                typeCas = "Graphe H2 complexe";
-                break;
-            default:
-                System.err.println("Choix invalide !");
-                return;
-        }
+        String fichier = "data/graphes_tests/secteurs_h2.txt";
+        String typeCas = "Contraintes de voisinage + capacité des camions";
 
         System.out.println("\n" + "=".repeat(60));
         System.out.println("TRAITEMENT : " + typeCas);
