@@ -86,7 +86,7 @@ public class Main {
         Routes3 gt = new Routes3(25);
 
         //on ajoute les arrêtes
-        gt.ajouterRouteSensUnique(1, 2, 4,1);
+        gt.ajouterRouteDoublesens(1, 2, 4,1);
         gt.ajouterRouteDoublesens(2, 3, 2,2);
         gt.ajouterRouteDoublesens(2, 6, 5,1);
         gt.ajouterRouteDoublesens(6, 5, 1,1);
@@ -116,7 +116,7 @@ public class Main {
         gt.ajouterRouteDoublesens(21, 22, 1,2);
         gt.ajouterRouteSensUnique(20, 23, 5,1);
         gt.ajouterRouteDoublesens(19, 24, 3,2);
-        gt.ajouterRouteDoublesens(18, 0, 1,1);
+        gt.ajouterRouteSensUnique(18, 0, 1,1);
         gt.ajouterRouteDoublesens(24, 0, 2,2);
         gt.ajouterRouteDoublesens(23, 24, 3,1);
 

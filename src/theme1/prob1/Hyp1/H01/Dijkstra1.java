@@ -1,8 +1,6 @@
 package src.theme1.prob1.Hyp1.H01;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Dijkstra1 {
     //méthode pour caculer le plus court chemin en fonction des données

@@ -80,7 +80,7 @@ public class Main {
         Routes2 gt = new Routes2(25);
 
         //on ajoute les arrêtes
-        gt.ajouterRouteSensUnique(1, 2, 4);
+        gt.ajouterRouteDoublesens(1, 2, 4);
         gt.ajouterRouteDoublesens(2, 3, 2);
         gt.ajouterRouteDoublesens(2, 6, 5);
         gt.ajouterRouteDoublesens(6, 5, 1);
@@ -110,7 +110,7 @@ public class Main {
         gt.ajouterRouteDoublesens(21, 22, 1);
         gt.ajouterRouteSensUnique(20, 23, 5);
         gt.ajouterRouteDoublesens(19, 24, 3);
-        gt.ajouterRouteDoublesens(18, 0, 1);
+        gt.ajouterRouteSensUnique(18, 0, 1);
         gt.ajouterRouteDoublesens(24, 0, 2);
         gt.ajouterRouteDoublesens(23, 24, 3);
 
@@ -148,8 +148,26 @@ public class Main {
                 List<Integer> chemin = Chemin(chem.pred, m.id);
 
                 if(m.verif !=1){
-                    System.out.println("Chemin le plus court : " + chemin);
-                    System.out.println("Distance totale : " + chem.distance[m.id] + " unités");
+
+                    int centre = depart;
+                    //faire Dijkstra sur le retour : de la maison au centre
+                    DijkstraDonnees2 chemRetour = Dijkstra2.calculpcc(gt, m.id);
+                    //reconstitution chemin retour
+                    List<Integer> cheminRetour = Chemin(chemRetour.pred,centre);
+
+                    // Si aucun chemin
+                    if (chemRetour.distance[centre] == Integer.MAX_VALUE) {
+                        System.out.println("Impossible de retourner au centre depuis la maison");
+                    }
+                    //construire le chemin complet
+                    List<Integer> cheminComplet = new ArrayList<>(chemin);
+                    //on met le retour mais sans mettre la maison 2fois
+                    cheminComplet.addAll(cheminRetour.subList(1, cheminRetour.size()));
+                    System.out.println("Chemin à emprunter : " +cheminComplet);
+                    System.out.println("Distance totale: " +(chem.distance[m.id] + chemRetour.distance[centre]) + " unites\n");
+                }
+                else{
+                    System.out.println("Impossible car mauvais cote\n");
                 }
 
             } else if (choix == 2) {
@@ -169,8 +187,23 @@ public class Main {
 
                     System.out.println("Maison sur " + m.depart + "->" + m.arrive + ", cote : " + (m.coteG?"gauche":"droit"));
                     if(m.verif !=1){
-                        System.out.println("Chemin à emprunter : " +chemin);
-                        System.out.println("Distance : " +chem.distance[m.id] + " unites\n");
+
+                        int centre = depart;
+                        //faire Dijkstra sur le retour : de la maison au centre
+                        DijkstraDonnees2 chemRetour = Dijkstra2.calculpcc(gt, m.id);
+                        //reconstitution chemin retour
+                        List<Integer> cheminRetour = Chemin(chemRetour.pred,centre);
+
+                        // Si aucun chemin
+                        if (chemRetour.distance[centre] == Integer.MAX_VALUE) {
+                            System.out.println("Impossible de retourner au centre depuis la maison");
+                        }
+                        //construire le chemin complet
+                        List<Integer> cheminComplet = new ArrayList<>(chemin);
+                        //on met le retour mais sans mettre la maison 2fois
+                        cheminComplet.addAll(cheminRetour.subList(1, cheminRetour.size()));
+                        System.out.println("Chemin à emprunter : " +cheminComplet);
+                        System.out.println("Distance totale: " +(chem.distance[m.id] + chemRetour.distance[centre]) + " unites\n");
                     }
                     else{
                         System.out.println("Impossible car mauvais cote\n");
