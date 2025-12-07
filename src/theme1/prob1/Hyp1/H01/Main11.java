@@ -1,19 +1,25 @@
 package src.theme1.prob1.Hyp1.H01;
 import java.util.*;
 
-public class Main {
+public class Main11 {
 
-    //Construire le chemin
+    //Construire le chemin (grace au tableau des predecesseurs)
     public static List<Integer> Chemin(int[] pred, int destination){
+        //liste pour stocker les sommets du chemin
         List<Integer> chemin = new ArrayList<>();
+        // act c'est le sommet actuel
         int act = destination;
         //tant que l'arrête de départ n'est pas atteinte, on prend le prédecesseur jusqu'à arriver à la source (chemin fait à l'envers)
         while(act!=-1){
+            //ajouter le sommet actuel a la liste
             chemin.add(act);
+            //remonter au predecesseur
             act=pred[act];
         }
+
         //chemin à l'envers donc on le remet à l'endroit
         Collections.reverse(chemin);
+
         // on retourne le chemin
         return chemin;
     }
@@ -21,11 +27,14 @@ public class Main {
     //main principal
     public static void main(String[] args) {
 
+        //scanner pour lire les interactions
         Scanner sc = new Scanner (System.in);
 
         //creation graphe pour test
+
         //25 sommets
         Routes1 gt = new Routes1(25);
+
         //on ajoute les arrêtes
         gt.ajouterRoute(1, 2, 4);
         gt.ajouterRoute(2, 3, 2);
@@ -64,28 +73,32 @@ public class Main {
         //sommet de départ du camion
         int depart = 1;
 
-        // Demandes des clients (sommet -> maison)
+        // Demandes des clients (sommet, maison)
         List<Integer> demandes = new ArrayList<>();
 
+        //menu theme 1 (aide de chatgpt)
         while (true) {
             System.out.println("\n--- Menu ---");
-            System.out.println("1. Client : demander un enlèvement");
-            System.out.println("2. Entreprise : voir toutes les demandes");
+            System.out.println("1. Demander un enlèvement");
+            System.out.println("2. Voir toutes les demandes");
             System.out.println("3. Quitter");
             System.out.print("Votre choix : ");
             int choix = sc.nextInt();
 
-            if (choix == 1) {
+            if ( choix == 1) {
                 System.out.print("Entrez le numéro de votre maison (0 à 25) : ");
                 int maison = sc.nextInt();
+                //sauvegarder la demande ds la liste
                 demandes.add(maison);
 
+                //faire Dijkstra a partir du centre de traitement
                 DijkstraDonnees1 res = Dijkstra1.calculpcc(gt, depart);
+                //le chemin aller
                 List<Integer> chemin = Chemin(res.pred, maison);
                 //le chemin retour
                 List<Integer> cheminRetour = new ArrayList<>(chemin);
                 Collections.reverse(cheminRetour);
-                // memes distances
+                // memes distances pour aller et retour
                 int distanceA = res.distance[maison];
                 int distanceR = distanceA;
 
@@ -100,13 +113,16 @@ public class Main {
 
                 if (demandes.isEmpty()) {
                     System.out.println("Aucune demande pour le moment.");
+                    //retourner au menu
                     continue;
                 }
 
                 System.out.println("\n--- Liste des demandes ---");
 
+                // Dijkstra une seule fois prcq la c'est just ela liste des demandes donc on donne le chemin aller pour information mais pas besoin de faire retour ici
                 DijkstraDonnees1 res = Dijkstra1.calculpcc(gt, depart);
 
+                //pour chaque demande afficher chemin et distance
                 for (int d : demandes) {
                     List<Integer> chemin = Chemin(res.pred, d);
                     System.out.println("Maison " + d + " : chemin " + chemin +
