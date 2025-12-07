@@ -5,7 +5,9 @@ import java.util.*;
 public class Main12 {
     //Construire le chemin
     public static List<Integer> Chemin(int[] pred, int destination){
+        //liste pour stocker le chemin
         List<Integer> chemin = new ArrayList<>();
+        // act c'est le sommet actuel
         int act = destination;
         //tant que l'arrête de départ n'est pas atteinte, on prend le prédecesseur jusqu'à arriver à la source (chemin fait à l'envers)
         while(act!=-1){
@@ -28,6 +30,7 @@ public class Main12 {
         Sortie2 arc = null;
         for (Sortie2 s : r.Adj().get(u)){
             if (s.numr == v){
+                //arete existe
                 arc = s;
                 break;
             }
@@ -35,6 +38,7 @@ public class Main12 {
         //si l'arête n'existe pas
         if (arc == null){
             System.out.println("La rue indique n'existe pas...");
+            //impossible de passer par la maison
             m.verif =1;
             return;
         }
@@ -118,8 +122,8 @@ public class Main12 {
 
         while (true) {
             System.out.println("\n--- Menu ---");
-            System.out.println("1. Client : demander un enlèvement");
-            System.out.println("2. Entreprise : voir toutes les demandes");
+            System.out.println("1. Demander un enlèvement");
+            System.out.println("2. Voir toutes les demandes");
             System.out.println("3. Quitter");
             System.out.print("Votre choix : ");
             int choix = sc.nextInt();
@@ -134,9 +138,11 @@ public class Main12 {
 
                 //creer et ajouter la maison
                 Maison2 m = new Maison2(departMaison, arriveeMaison, coteGauche);
-                //sommet
+                //sommet ajouté avec son indice
                 m.id = gt.ajouterMaison();
+                //relier maison au graphe
                 maisonGraphe(gt, m);
+                //ajouter à liste des demandes
                 demandes.add(m);
 
                 //calcul chemin avec Dijkstra
@@ -180,8 +186,8 @@ public class Main12 {
 
                 for (Maison2 m : demandes) {
                     List<Integer> chemin = Chemin(chem.pred,m.id);
-
                     System.out.println("Maison sur " + m.depart + "->" + m.arrive + ", cote : " + (m.coteG?"gauche":"droit"));
+
                     if(m.verif !=1){
 
                         int centre = depart;

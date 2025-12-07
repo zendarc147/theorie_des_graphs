@@ -12,9 +12,10 @@ public class Routes2 {
     //constructeur
     public Routes2(int n) {
         this.n = n;
-        //ArrayList de ArrayList (pour chaque sommet, il y a une liste des voisins adjacents)
+        //ArrayList de ArrayList (pour chaque sommet de la liste, il y a une liste des voisins adjacents)
+        //initialisé la liste des sommets (externe) vide
         sortie = new ArrayList<>();
-        //boucle pour initialiser tt les sommets avec liste vide
+        //boucle pour initialiser tt les sommets avec liste vide (listes interne)
         for (int i = 0; i < n; i++) {
             sortie.add(new ArrayList<>());
         }
@@ -34,6 +35,7 @@ public class Routes2 {
     }
 
     public int ajouterMaison(){
+        //liste vide pour la nouvelle maison
         sortie.add(new ArrayList<>());
         n++;
         //donner indice de la maison (n-1 car indices commencent à 0)
