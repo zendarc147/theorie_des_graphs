@@ -1,6 +1,5 @@
 import theme2.approche1.Mt2;
 import theme2.approche1.Mt2Citoyen;
-import theme2.approche2.Mt22;
 import theme2.approche2.Mt22AvecCapacite;
 import theme2.approche2.Mt22Citoyen;
 import theme1.prob1.Hyp1.H01.*;
